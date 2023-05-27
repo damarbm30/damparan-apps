@@ -1,8 +1,8 @@
-import Home from "./Home";
-import KartaNU from "./KartaNU";
-import Pemberitahuan from "./Pemberitahuan";
-import Pesantren from "./Pesantren";
-import Profil from "./Profil";
-import InfoPesantren from "./InfoPesantren";
+import Home from "./Home/Home";
+import Login from "./Login/Login";
+import PesantrenForm from "./PesantrenForm/PesantrenForm";
+import PesantrenList from "./PesantrenList/PesantrenList";
+import PesantrenPage from "./PesantrenPage/PesantrenPage";
+import PesantrenSearch from "./PesantrenSearch/PesantrenSearch";
 
-export { Home, KartaNU, Pemberitahuan, Pesantren, Profil, InfoPesantren };
+export { Home, Login, PesantrenForm, PesantrenList, PesantrenPage, PesantrenSearch };

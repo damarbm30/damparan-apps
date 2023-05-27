@@ -37,6 +37,126 @@ export const listPesantren = [
   },
 ];
 
+export const pesantrenSalafiyah = [
+  {
+    id: 1,
+    nama: "Pondok Pesantren 1",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 2,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 3,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 4,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 5,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 6,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 7,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 8,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+  {
+    id: 9,
+    nama: "Nama Pondok",
+    yayasan_pengasuh: "Yayasan/Pengasuh",
+    deskripsi:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    pendidikan: ["SMP", "SMA", "Mahad Ali"],
+    kecamatan: "Mlati",
+    kabupaten: "Sleman",
+    alamat: "Sinduadi, Melati, Sleman, Daerah Istimewa Yogyakarta",
+    fasilitas: "Asrama ber-AC, masjid, kamar mandi",
+    foto: "https://picsum.photos/200",
+  },
+];
+
 export const listPromo = [
   {
     id: 1,

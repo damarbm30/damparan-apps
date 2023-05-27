@@ -1,22 +1,19 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Home, KartaNU, Pemberitahuan, Pesantren, Profil, InfoPesantren } from "~/pages";
 import { Navbar } from "~/components";
+import { Home, Login, PesantrenForm, PesantrenList, PesantrenPage, PesantrenSearch } from "~/pages";
 
 const App = () => {
-  const [data, setData] = useState({});
-
   return (
     <main className="container">
       <Routes>
         <Route element={<Navbar />}>
-          {/* <Route index path="/" element={<Home />} /> */}
-          {/* <Route index path="/karta-nu" element={<KartaNU />} /> */}
-          {/* <Route index path="/pemberitahuan" element={<Pemberitahuan />} /> */}
-          <Route index path="/" element={<Pesantren />} />
-          {/* <Route index path="/profil" element={<Profil />} /> */}
-          <Route index path="/info-pesantren" element={<InfoPesantren />} />
+          <Route index path="/login" element={<Login />} />
+          <Route index path="/" element={<Home />} />
+          <Route index path="/pesantren" element={<PesantrenList />} />
+          <Route index path="/pesantren/:id" element={<PesantrenPage />} />
+          <Route index path="/tambah-pesantren" element={<PesantrenForm />} />
+          <Route index path="/pencarian" element={<PesantrenSearch />} />
         </Route>
       </Routes>
     </main>

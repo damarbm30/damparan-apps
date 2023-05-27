@@ -1,34 +1,44 @@
-import arrowLeft from "./arrow-left.svg";
-import arrowRight from "./arrow-right.svg";
-import bell from "./bell.svg";
+import arrowLeft from "./arrow-left.webp";
+import arrowRight from "./arrow-right.webp";
+import bell from "./bell.webp";
+import board from "./board.webp";
+import building from "./building.webp";
 import camera from "./camera.webp";
 import checkmark from "./checkmark.webp";
 import dots from "./dots.webp";
 import dropdown from "./dropdown.webp";
-import home from "./home.svg";
-import kartaNU from "./karta-nu.webp";
+import googleLogo from "./google-logo.webp";
+import home from "./home.webp";
+import imgPlaceholder from "./img-placeholder.webp";
 import koinNU from "./koin-nu.webp";
+import location from "./location.webp";
+import logo from "./logo.webp";
 import masjid from "./masjid.webp";
-import minus from "./minus.svg";
+import minus from "./minus.webp";
 import mubaligh from "./mubaligh.webp";
-import notification from "./notification.svg";
+import notification from "./notification.webp";
 import pesantren from "./pesantren.webp";
-import plus from "./plus.svg";
+import plus from "./plus.webp";
 import pondokKita from "./pondok-kita.webp";
-import profile from "./profile.svg";
+import profile from "./profile.webp";
 import search from "./search.webp";
 
 export {
   arrowLeft,
   arrowRight,
   bell,
+  board,
+  building,
   camera,
   checkmark,
   dots,
   dropdown,
+  googleLogo,
   home,
-  kartaNU,
+  imgPlaceholder,
   koinNU,
+  location,
+  logo,
   masjid,
   minus,
   mubaligh,
