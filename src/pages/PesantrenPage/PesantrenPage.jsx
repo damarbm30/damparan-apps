@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
-import { Searchbar } from "~/features";
+import { Searchbar } from "~/components";
 import { pesantrenSalafiyah } from "~/constants/dummy";
 
 const PesantrenPage = () => {

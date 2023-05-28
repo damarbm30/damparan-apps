@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
-import { Pesantren, Pagination, Title } from "~/components";
-import { Searchbar } from "~/features";
+import { Pesantren, Pagination, Searchbar } from "~/components";
 import { pesantrenSalafiyah } from "../../constants/dummy";
 
 const PesantrenSearch = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [pesantrenPerPage, setPesantrenPerPage] = useState(4);
-  const searchQuery = useSelector((state) => state.searchbar.searchQuery);
 
-  const searchResult = pesantrenSalafiyah.filter((pesantren) => pesantren.nama.toLowerCase().includes(searchQuery));
+  const searchResult = pesantrenSalafiyah.filter(
+    (pesantren) =>
+      pesantren.nama.toLowerCase().includes(searchParams.get("name")) &&
+      pesantren.kabupaten.toLowerCase().includes(searchParams.get("city"))
+  );
 
   const lastIndex = pesantrenPerPage * currentPage;
   const firstIndex = lastIndex - pesantrenPerPage;
@@ -24,10 +27,13 @@ const PesantrenSearch = () => {
 
   return (
     <section>
-      <Title hideButton>
+      <div className="mb-4 pt-3">
         <Searchbar />
-      </Title>
-      <p>Menampilkan hasil pencarian untuk '{searchQuery}'</p>
+      </div>
+      <p className="mb-8">
+        Menampilkan hasil pencarian '{searchParams.get("name")}'{" "}
+        {searchParams.get("city") && `untuk daerah '${searchParams.get("city")}'`}
+      </p>
       <ul className="mb-6 flex flex-col">
         {currentSearchResult?.length > 0 &&
           currentSearchResult?.map((pesantren) => {
