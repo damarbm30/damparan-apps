@@ -6,7 +6,7 @@ const Searchbar = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="rounded-2xl bg-primary px-2 py-1 text-white outline-none">
+    <div className="rounded-xl bg-primary px-2 py-2 text-white outline-none">
       <div
         className="w-full bg-[url('/src/assets/search.webp')] bg-contain bg-right bg-no-repeat"
         onClick={() => setShowModal(true)}
