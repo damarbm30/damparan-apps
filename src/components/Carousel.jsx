@@ -30,11 +30,15 @@ const Carousel = ({ data }) => {
         className="pb-10"
         modules={[Pagination]}
         spaceBetween={12}
-        slidesPerView={2}
         pagination={{ clickable: true }}
         loop={true}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
+        }}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+          },
         }}
       >
         {data &&
@@ -43,7 +47,7 @@ const Carousel = ({ data }) => {
 
             return (
               <SwiperSlide key={id}>
-                <img src={img} className="h-[100px] w-full rounded-t-xl object-cover" />
+                <img src={img} className="h-[150px] w-full rounded-t-xl object-cover" alt={name} />
                 <div className="rounded-b-xl px-4 py-3 shadow-xl">
                   <p className="font-bold text-secondary">{name}</p>
                   <p className="text-secondary">{desc}</p>
