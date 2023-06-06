@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { Title } from "~/components";
-import Identitas from "./Identitas";
-import Keilmuan from "./Keilmuan";
-import Pendidikan from "./Pendidikan";
-import Tambahan from "./Tambahan";
-import Foto from "./Foto";
-import Confirmation from "./Confirmation";
+const Identitas = lazy(() => import("./Identitas"));
+const Keilmuan = lazy(() => import("./Keilmuan"));
+const Pendidikan = lazy(() => import("./Pendidikan"));
+const Tambahan = lazy(() => import("./Tambahan"));
+const Foto = lazy(() => import("./Foto"));
+const Confirmation = lazy(() => import("./Confirmation"));
 import { checkmark } from "~/assets";
 
-const PesantrenForm = () => {
+const AddPesantren = () => {
   const identitasSchema = yup.object().shape({
     pesantren: yup.string().required(),
     yayasan: yup.string().required(),
@@ -267,4 +267,4 @@ const PesantrenForm = () => {
   );
 };
 
-export default PesantrenForm;
+export default AddPesantren;

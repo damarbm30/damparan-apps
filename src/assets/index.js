@@ -19,9 +19,10 @@ import mubaligh from "./mubaligh.webp";
 import notification from "./notification.webp";
 import pesantren from "./pesantren.webp";
 import plus from "./plus.webp";
-import pondokKita from "./pondok-kita.webp";
 import profile from "./profile.webp";
+import powerOff from "./power-off.webp";
 import search from "./search.webp";
+import xSymbol from "./x-symbol.webp";
 
 export {
   arrowLeft,
@@ -45,7 +46,8 @@ export {
   notification,
   pesantren,
   plus,
-  pondokKita,
+  powerOff,
   profile,
   search,
+  xSymbol,
 };

@@ -4,7 +4,9 @@ import storage from "redux-persist/lib/storage";
 
 import { apiSlice } from "./api/apiSlice";
 
-// const reducers = combineReducers({});
+const reducers = combineReducers({
+  [apiSlice.reducerPath]: apiSlice.reducer,
+});
 
 // const persistConfig = {
 //   key: "root",
@@ -14,7 +16,7 @@ import { apiSlice } from "./api/apiSlice";
 // const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-  reducer: { [apiSlice.reducerPath]: apiSlice.reducer },
+  reducer: reducers,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
   //   middleware: (getDefaultMiddleware) =>
   //     getDefaultMiddleware({

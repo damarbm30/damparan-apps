@@ -29,7 +29,7 @@ const Carousel = ({ data }) => {
         }}
         className="pb-10"
         modules={[Pagination]}
-        spaceBetween={50}
+        spaceBetween={12}
         slidesPerView={2}
         pagination={{ clickable: true }}
         loop={true}

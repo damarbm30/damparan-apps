@@ -1,10 +1,11 @@
-import Carousel from "./Carousel/Carousel";
-import Modal from "./Modal/Modal";
-import Navbar from "./Navbar/Navbar";
-import Pagination from "./Pagination/Pagination";
-import Pesantren from "./Pesantren/Pesantren";
-import Search from "./Search/Search";
-import Searchbar from "./Searchbar/Searchbar";
-import Title from "./Title/Title";
+import Carousel from "./Carousel";
+import Loader from "./Loader";
+import Modal from "./Modal";
+import Navbar from "./Navbar";
+import Pagination from "./Pagination";
+import PesantrenItem from "./PesantrenItem";
+import Search from "./Search";
+import Searchbar from "./Searchbar";
+import Title from "./Title";
 
-export { Carousel, Modal, Navbar, Pagination, Pesantren, Search, Searchbar, Title };
+export { Carousel, Loader, Modal, Navbar, Pagination, PesantrenItem, Search, Searchbar, Title };
