@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { Pesantren, Pagination, Searchbar } from "~/components";
-import { pesantrenSalafiyah } from "../../constants/dummy";
+import { PesantrenItem, Pagination, Searchbar } from "~/components";
+import { useGetPesantrenQuery } from "~/app/api/apiSlice";
 
 const PesantrenSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [pesantrenPerPage, setPesantrenPerPage] = useState(4);
+  const { data: pesantrenApi, isLoading, isSuccess, isError, error, refetch } = useGetPesantrenQuery();
 
-  const searchResult = pesantrenSalafiyah.filter(
-    (pesantren) =>
-      pesantren.nama.toLowerCase().includes(searchParams.get("name")) &&
-      pesantren.kabupaten.toLowerCase().includes(searchParams.get("city"))
-  );
+  const searchResult = pesantrenApi?.filter((pesantren) => {
+    // const alamat = pesantren.alamat.split(",");
+    // const kabupaten = alamat[alamat.length - 1].trim();
+
+    return (
+      pesantren.pesantren.toLowerCase().includes(searchParams.get("name")) &&
+      pesantren.alamat.toLowerCase().includes(searchParams.get("city"))
+    );
+  });
 
   const lastIndex = pesantrenPerPage * currentPage;
   const firstIndex = lastIndex - pesantrenPerPage;
@@ -37,7 +42,7 @@ const PesantrenSearch = () => {
       <ul className="mb-6 flex flex-col">
         {currentSearchResult?.length > 0 &&
           currentSearchResult?.map((pesantren) => {
-            return <Pesantren key={pesantren.id} {...pesantren} />;
+            return <PesantrenItem key={pesantren.id} {...pesantren} />;
           })}
       </ul>
       <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} />

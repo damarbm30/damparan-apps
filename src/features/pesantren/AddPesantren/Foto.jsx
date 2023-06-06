@@ -1,5 +1,5 @@
-import { imgPlaceholder } from "../../assets";
-import useFilePreview from "../../hooks/useFilePreview";
+import { imgPlaceholder } from "~/assets";
+import useFilePreview from "~/hooks/useFilePreview";
 
 const Foto = ({ register, watch }) => {
   const file = watch("foto");

@@ -1,21 +1,27 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Navbar } from "~/components";
-import { Home, Login, PesantrenForm, PesantrenList, PesantrenPage, PesantrenSearch } from "~/pages";
+import { Loader, Navbar } from "~/components";
+import { Dashboard, Home, Login } from "~/pages";
+import { AddPesantren, Pesantren, PesantrenList, PesantrenPage, PesantrenSearch } from "./features/pesantren";
+import { Suspense } from "react";
 
 const App = () => {
   return (
     <main className="container">
-      <Routes>
-        <Route element={<Navbar />}>
-          <Route index path="/login" element={<Login />} />
-          <Route index path="/" element={<Home />} />
-          <Route index path="/pesantren" element={<PesantrenList />} />
-          <Route index path="/pesantren/:id" element={<PesantrenPage />} />
-          <Route index path="/tambah-pesantren" element={<PesantrenForm />} />
-          <Route index path="/pencarian" element={<PesantrenSearch />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route element={<Navbar />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/pesantren" element={<Pesantren />} />
+            <Route path="/pesantren/all" element={<PesantrenList />} />
+            <Route path="/pesantren/:id" element={<PesantrenPage />} />
+            <Route path="/tambah-pesantren" element={<AddPesantren />} />
+            <Route path="/pencarian" element={<PesantrenSearch />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </main>
   );
 };

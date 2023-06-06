@@ -44,14 +44,20 @@ const Search = ({ setShowModal }) => {
         <label htmlFor="city" className="font-bold text-body">
           Kota/Kabupaten
         </label>
-        <input
-          type="text"
+        <select
           name="city"
           id="city"
           placeholder="Tulis kota/kabupaten pondok"
           className="rounded bg-neutral px-3 py-2 font-light text-body outline-none placeholder:text-muted"
           {...register("kota_kabupaten")}
-        />
+        >
+          <option value="">Semua</option>
+          <option value="bantul">Bantul</option>
+          <option value="gunungkidul">Gunungkidul</option>
+          <option value="kulonprogo">Kulon Progo</option>
+          <option value="sleman">Sleman</option>
+          <option value="yogyakarta">Kota Yogyakarta</option>
+        </select>
       </div>
       {/* tipe pondok */}
       {/* <div className="mb-5 flex flex-col gap-1">
