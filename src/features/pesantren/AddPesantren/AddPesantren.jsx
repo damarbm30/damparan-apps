@@ -12,6 +12,7 @@ const Tambahan = lazy(() => import("./Tambahan"));
 const Foto = lazy(() => import("./Foto"));
 const Confirmation = lazy(() => import("./Confirmation"));
 import { checkmark } from "~/assets";
+import { useAddPesantrenMutation } from "~/app/api/apiSlice";
 
 const AddPesantren = () => {
   const identitasSchema = yup.object().shape({
@@ -85,6 +86,7 @@ const AddPesantren = () => {
   const [step, setStep] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [addPesantren] = useAddPesantrenMutation();
   const {
     register,
     handleSubmit,
@@ -209,13 +211,16 @@ const AddPesantren = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+      if (typeof value === "object") formData.append(key, value[0]);
+      formData.append(key, value);
+    }
+
+    addPesantren(formData);
+
     setShowModal(false);
-    // const formData = new FormData();
-    // for (const [key, value] of Object.entries(data)) {
-    //   if (typeof value === "object") formData.append(key, value[0]);
-    //   formData.append(key, value);
-    // }
+    setIsSubmit(true);
   };
 
   const changePage = (direction) => {
@@ -225,32 +230,27 @@ const AddPesantren = () => {
 
   return (
     <section>
-      {/* {!isSubmit ? (
-        <> */}
-      <Title>{displayTitle()}</Title>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-3">{displayForm()}</div>
-        <div className="flex justify-center gap-3">
-          {step > 1 && (
-            <button type="button" className="btn bg-muted" onClick={() => changePage()}>
-              Kembali
-            </button>
-          )}
-          {step === 5 ? (
-            <Confirmation
-              enabled={isValid}
-              setIsSubmit={setIsSubmit}
-              showModal={showModal}
-              setShowModal={setShowModal}
-            />
-          ) : (
-            <button type="button" className="btn bg-primary" onClick={() => changePage("next")} disabled={!isValid}>
-              Berikutnya
-            </button>
-          )}
-        </div>
-      </form>
-      {/* </>
+      {!isSubmit ? (
+        <>
+          <Title>{displayTitle()}</Title>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-3">{displayForm()}</div>
+            <div className="flex justify-center gap-3">
+              {step > 1 && (
+                <button type="button" className="btn bg-muted" onClick={() => changePage()}>
+                  Kembali
+                </button>
+              )}
+              {step === 5 ? (
+                <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
+              ) : (
+                <button type="button" className="btn bg-primary" onClick={() => changePage("next")} disabled={!isValid}>
+                  Berikutnya
+                </button>
+              )}
+            </div>
+          </form>
+        </>
       ) : (
         <>
           <Title>Pendaftaran Pesantren</Title>
@@ -262,7 +262,7 @@ const AddPesantren = () => {
             </Link>
           </div>
         </>
-      )} */}
+      )}
     </section>
   );
 };

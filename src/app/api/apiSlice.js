@@ -12,9 +12,22 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getPesantren: builder.query({
       query: () => "/pesantren",
+      transformResponse: (response, meta) => {
+        console.log(meta.response);
+
+        return response;
+      },
       providesTags: ["Pesantren"],
+    }),
+    addPesantren: builder.mutation({
+      query: (pesantren) => ({
+        url: "/pesantren/add",
+        method: "POST",
+        body: pesantren,
+      }),
+      invalidatesTags: ["Pesantren"],
     }),
   }),
 });
 
-export const { useGetPesantrenQuery } = apiSlice;
+export const { useGetPesantrenQuery, useAddPesantrenMutation } = apiSlice;

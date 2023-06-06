@@ -1,7 +1,7 @@
 import { bell } from "~/assets";
 import { Modal } from "~/components";
 
-const Confirmation = ({ enabled, setIsSubmit, showModal, setShowModal }) => {
+const Confirmation = ({ enabled, showModal, setShowModal }) => {
   return (
     <>
       <button className="btn bg-primary" type="button" disabled={!enabled} onClick={() => setShowModal(true)}>
@@ -20,13 +20,7 @@ const Confirmation = ({ enabled, setIsSubmit, showModal, setShowModal }) => {
           <button className="btn bg-muted" type="button" onClick={() => setShowModal(false)}>
             Kembali
           </button>
-          <input
-            type="submit"
-            className="btn cursor-pointer bg-primary"
-            disabled={!enabled}
-            value="Ya"
-            onClick={() => setIsSubmit(true)}
-          />
+          <input type="submit" className="btn cursor-pointer bg-primary" disabled={!enabled} value="Ya" />
         </div>
       </Modal>
     </>
