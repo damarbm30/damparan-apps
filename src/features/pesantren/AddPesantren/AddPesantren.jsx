@@ -18,6 +18,7 @@ const AddPesantren = () => {
   const identitasSchema = yup.object().shape({
     pesantren: yup.string().required(),
     yayasan: yup.string().required(),
+    pendiri: yup.string().required(),
     pengasuh: yup.string().required(),
     daftarPengasuh: yup
       .array()
@@ -218,6 +219,8 @@ const AddPesantren = () => {
     }
 
     addPesantren(formData);
+
+    console.log(data);
 
     setShowModal(false);
     setIsSubmit(true);

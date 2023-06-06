@@ -2,8 +2,8 @@ import { imgPlaceholder } from "~/assets";
 import useFilePreview from "~/hooks/useFilePreview";
 
 const Foto = ({ register, watch }) => {
-  const file = watch("foto");
-  const [filePreview] = useFilePreview(file);
+  // const file = watch("foto");
+  // const [filePreview] = useFilePreview(file);
 
   return (
     <div className="flex flex-col gap-2">
@@ -18,14 +18,15 @@ const Foto = ({ register, watch }) => {
           <p className="text-xs font-bold text-muted">Upload Foto</p>
         </div>
       </label>
-      <input type="file" id="foto" multiple className="hidden" {...register("foto", { required: true })} />
+      <input type="text" id="foto" className="" {...register("foto", { required: true })} />
+      {/* <input type="file" id="foto" multiple className="hidden" {...register("foto", { required: true })} />
       <div className="mx-auto">
         {filePreview
           ? filePreview.map((file, idx) => {
               return <img key={idx} src={file} alt="preview" className="rounded" width={200} height={200} />;
             })
           : null}
-      </div>
+      </div> */}
     </div>
   );
 };
