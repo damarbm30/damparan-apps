@@ -1,15 +1,18 @@
+import krapyak from "../assets/populer/krapyak.jpg";
+import pesantren1 from "../assets/populer/pesantren-1.jpg";
+
 export const listPesantren = [
   {
     id: 1,
-    name: "Image 1",
-    desc: "Desc 1",
-    img: "https://swiperjs.com/demos/images/nature-1.jpg",
+    name: "Ali Maksum",
+    desc: "",
+    img: krapyak,
   },
   {
     id: 2,
-    name: "Image 2",
-    desc: "Desc 2",
-    img: "https://swiperjs.com/demos/images/nature-2.jpg",
+    name: "Al-Munawwir",
+    desc: "",
+    img: pesantren1,
   },
   {
     id: 3,
