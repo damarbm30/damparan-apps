@@ -21,7 +21,7 @@ export const apiSlice = createApi({
     }),
     addPesantren: builder.mutation({
       query: (pesantren) => ({
-        url: "/pesantren/add",
+        url: "/pesantren",
         method: "POST",
         body: pesantren,
       }),

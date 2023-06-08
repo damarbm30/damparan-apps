@@ -10,7 +10,6 @@ const TextInput = ({ label, name, register, fields, handleAppend, handleRemove, 
         <input
           type="text"
           id={name}
-          placeholder=""
           className="rounded bg-neutral px-3 py-2 font-light outline-none placeholder:text-black"
           {...register(name, { required: true })}
         />
@@ -22,9 +21,8 @@ const TextInput = ({ label, name, register, fields, handleAppend, handleRemove, 
                 <input
                   type="text"
                   id={`${name}${index}`}
-                  placeholder=""
                   className="w-full rounded bg-neutral px-3 py-2 font-light outline-none placeholder:text-black"
-                  {...register(`${name}[${index}].name`)}
+                  {...register(`${name}[${index}]`)}
                 />
                 <button
                   type="button"
@@ -36,7 +34,7 @@ const TextInput = ({ label, name, register, fields, handleAppend, handleRemove, 
                 <button
                   type="button"
                   className={`relative flex items-center ${index === 0 ? "right-2" : "right-8"}`}
-                  onClick={() => handleAppend()}
+                  onClick={() => handleAppend("")}
                 >
                   <img src={plus} alt="add" width={16} height={16} />
                 </button>

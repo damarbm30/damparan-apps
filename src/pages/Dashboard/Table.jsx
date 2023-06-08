@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { minus } from "~/assets";
+
 const INFORMASI_HEADER = [
   "Nama Pesantren",
   "Nama Yayasan",
@@ -32,8 +34,9 @@ const InformasiData = ({ className }) => {
       <td className={className}>Ny. Hj. Dra. Ida Rufaida Ali</td>
       <td className={className}>Jl. KH. Ali Maksum Gg. Mawar No.RT.06, Krapyak Kulon, Panggungharjo, </td>
       <td className={className}>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button className="flex w-full justify-center">
+          <img src={minus} alt="delete button" width={20} height={20} />
+        </button>
       </td>
     </>
   );
@@ -74,8 +77,7 @@ const TambahanData = ({ className }) => {
   );
 };
 
-const Table = () => {
-  const [active, setActive] = useState("informasi");
+const Table = ({ active }) => {
   const [header, setHeader] = useState(INFORMASI_HEADER);
 
   useEffect(() => {
@@ -95,15 +97,15 @@ const Table = () => {
       default:
         break;
     }
-  }, []);
+  }, [active]);
 
   return (
-    <table className="w-screen">
+    <table className="w-full">
       <thead>
         <tr>
           {header.map((header, idx) => {
             return (
-              <th key={idx} className="max-w-[150px] break-words px-4 py-3 text-left">
+              <th key={idx} className="max-w-[125px] break-words px-4 py-3 text-left">
                 {header}
               </th>
             );
@@ -114,10 +116,10 @@ const Table = () => {
         {[0, 1, 2].map((item, idx) => {
           return (
             <tr key={idx} className={`${idx % 2 === 0 ? "bg-neutral" : ""} text-sm`}>
-              {active === "informasi" && <InformasiData className="max-w-[350px] px-4 py-3" />}
-              {active === "keilmuan" && <KeilmuanData className="max-w-[350px] px-4 py-3" />}
-              {active === "pendidikan" && <PendidikanData className="max-w-[350px] px-4 py-3" />}
-              {active === "tambahan" && <TambahanData className="max-w-[350px] px-4 py-3" />}
+              {active === "informasi" && <InformasiData className="px-4 py-3" />}
+              {active === "keilmuan" && <KeilmuanData className="px-4 py-3" />}
+              {active === "pendidikan" && <PendidikanData className="px-4 py-3" />}
+              {active === "tambahan" && <TambahanData className="px-4 py-3" />}
             </tr>
           );
         })}

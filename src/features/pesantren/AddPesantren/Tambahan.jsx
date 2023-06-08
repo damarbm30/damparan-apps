@@ -16,10 +16,10 @@ const Tambahan = ({ register, usahaFields, usahaAppend, usahaRemove }) => {
       />
       <TextInput label="Link Google Maps" name="gmaps" register={register} />
       <p className="font-bold text-body">Media Pesantren (Opsional)</p>
-      <TextInput label="Instagram" name="instagram" register={register} fontNormal />
-      <TextInput label="Facebook" name="facebook" register={register} fontNormal />
-      <TextInput label="Twitter" name="twitter" register={register} fontNormal />
-      <TextInput label="Website" name="website" register={register} fontNormal />
+      <TextInput label="Instagram" name="media.instagram" register={register} fontNormal />
+      <TextInput label="Facebook" name="media.facebook" register={register} fontNormal />
+      <TextInput label="Twitter" name="media.twitter" register={register} fontNormal />
+      <TextInput label="Website" name="media.website" register={register} fontNormal />
     </div>
   );
 };

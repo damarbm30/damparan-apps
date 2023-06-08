@@ -24,7 +24,7 @@ const SelectInput = ({ children, label, name, register, fields, handleAppend, ha
                   id={`${name}${index}`}
                   placeholder=""
                   className="w-full appearance-none rounded bg-neutral px-3 py-2 font-light outline-none placeholder:text-black"
-                  {...register(`${name}[${index}].name`)}
+                  {...register(`${name}[${index}]`)}
                 >
                   {children}
                 </select>
@@ -38,7 +38,7 @@ const SelectInput = ({ children, label, name, register, fields, handleAppend, ha
                 <button
                   type="button"
                   className={`relative flex items-center ${index === 0 ? "right-2" : "right-8"}`}
-                  onClick={() => handleAppend()}
+                  onClick={() => handleAppend("")}
                 >
                   <img src={plus} alt="add" width={16} height={16} />
                 </button>

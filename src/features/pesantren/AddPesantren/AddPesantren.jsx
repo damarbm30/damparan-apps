@@ -21,10 +21,11 @@ const AddPesantren = () => {
     yayasan: yup.string().required(),
     pendiri: yup.string().required(),
     pengasuh: yup.string().required(),
-    daftarPengasuh: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
+    // daftarPengasuh: yup
+    //   .array()
+    //   .of(yup.object().shape({ value: yup.string().required() }))
+    //   .required(),
+    daftarPengasuh: yup.array().of(yup.string().required()).required(),
     alamat: yup.object().shape({
       alamat: yup.string().required(),
       kecamatan: yup.string().required(),
@@ -32,52 +33,68 @@ const AddPesantren = () => {
     }),
   });
   const keilmuanSchema = yup.object().shape({
+    // keilmuan: yup.object().shape({
     sanad: yup.string().required(),
-    talim: yup
-      .array()
-      .of(
-        yup.object().shape({
-          name: yup.string().required(),
-        })
-      )
-      .required(),
-    pendidikan: yup
-      .array()
-      .of(
-        yup.object().shape({
-          name: yup.string().required(),
-        })
-      )
-      .required(),
+    // talim: yup
+    //   .array()
+    //   .of(
+    //     yup.object().shape({
+    //       value: yup.string().required(),
+    //     })
+    //   )
+    //   .required(),
+    talim: yup.array().of(yup.string().required()).required(),
+    // pendidikan: yup
+    //   .array()
+    //   .of(
+    //     yup.object().shape({
+    //       value: yup.string().required(),
+    //     })
+    //   )
+    //   .required(),
+    // }),
+    pendidikan: yup.array().of(yup.string().required()).required(),
+    // }),
   });
   const pendidikanSchema = yup.object().shape({
-    lembFormal: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
-    lembNonFormal: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
-    pendFormal: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
-    lainLain: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
+    // lembaga_pendidikan: yup.object().shape({
+    // lembFormal: yup
+    //   .array()
+    //   .of(yup.object().shape({ value: yup.string().required() }))
+    //   .required(),
+    // lembNonFormal: yup
+    //   .array()
+    //   .of(yup.object().shape({ value: yup.string().required() }))
+    //   .required(),
+    // pendFormal: yup
+    //   .array()
+    //   .of(yup.object().shape({ value: yup.string().required() }))
+    //   .required(),
+    // lainLain: yup
+    //   .array()
+    //   .of(yup.object().shape({ value: yup.string().required() }))
+    //   .required(),
+    lembFormal: yup.array().of(yup.string().required()).required(),
+    lembNonFormal: yup.array().of(yup.string().required()).required(),
+    pendFormal: yup.array().of(yup.string().required()).required(),
+    lainLain: yup.array().of(yup.string().required()).required(),
+    // }),
   });
   const tambahanSchema = yup.object().shape({
+    // informasi_tambahan: yup.object().shape({
     gmaps: yup.string().required(),
+    // }),
   });
   const infoSchema = yup.object().shape({
     deskripsi: yup.string().required(),
-    fasilitas: yup.array().of(
-      yup.object().shape({
-        name: yup.string().required(),
-      })
-    ),
+    // informasi_tambahan: yup.object().shape({
+    fasilitas: yup.array().of(yup.string().required()),
+    // fasilitas: yup.array().of(
+    //   yup.object().shape({
+    //     value: yup.string().required(),
+    //   })
+    // ),
+    // }),
   });
   const fotoSchema = yup.object().shape({
     foto: yup.mixed().test("required", (value) => {
@@ -106,15 +123,15 @@ const AddPesantren = () => {
     watch,
   } = useForm({
     defaultValues: {
-      daftarPengasuh: [{ name: "" }],
-      talim: [{ name: "" }],
-      pendidikan: [{ name: "" }],
-      lembFormal: [{ name: "" }],
-      lembNonFormal: [{ name: "" }],
-      pendFormal: [{ name: "" }],
-      lainLain: [{ name: "" }],
-      usaha: [{ name: "" }],
-      fasilitas: [{ name: "" }],
+      daftarPengasuh: ["-"],
+      talim: [{}],
+      pendidikan: [{}],
+      lembFormal: [{}],
+      lembNonFormal: [{}],
+      pendFormal: [{}],
+      lainLain: [{}],
+      usaha: [{}],
+      fasilitas: [{}],
     },
     resolver: yupResolver(validateForm()),
   });
@@ -239,16 +256,40 @@ const AddPesantren = () => {
   };
 
   const onSubmit = (data) => {
-    const formData = new FormData();
-    for (const [key, value] of Object.entries(data)) {
-      if (typeof value === "object") formData.append(key, value[0]);
-      formData.append(key, value);
-    }
+    // const formData = new FormData();
+    // for (const [key, value] of Object.entries(data)) {
+    //   if (typeof value === "object") formData.append(key, value[0]);
+    //   formData.append(key, value);
+    // }
 
-    // addPesantren(formData);
-    // addPesantren(data);
+    const formattedData = {
+      pesantren: data.pesantren,
+      yayasan: data.yayasan,
+      pendiri: data.pendiri,
+      pengasuh: data.pengasuh,
+      deskripsi: data.deskripsi,
+      daftarPengasuh: data.daftarPengasuh,
+      alamat: data.alamat,
+      keilmuan: {
+        sanad: [data.sanad],
+        talim: data.talim,
+        pendidikan: data.pendidikan,
+      },
+      lembaga_pendidikan: {
+        lembFormal: data.lembFormal,
+        lembNonFormal: data.lembNonFormal,
+        pendFormal: data.pendFormal,
+        lainLain: data.lainLain,
+      },
+      informasi_tambahan: {
+        usaha: data.usaha,
+        gmaps: data.gmaps,
+        fasilitas: data.fasilitas,
+      },
+      media: data.media,
+    };
 
-    console.log(data);
+    addPesantren(formattedData);
 
     setShowModal(false);
     setIsSubmit(true);
@@ -261,27 +302,27 @@ const AddPesantren = () => {
 
   return (
     <section>
-      {!isSubmit ? (
-        <>
-          <Title>{displayTitle()}</Title>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-3">{displayForm()}</div>
-            <div className="flex justify-center gap-3">
-              {step > 1 && (
-                <button type="button" className="btn bg-muted" onClick={() => changePage()}>
-                  Kembali
-                </button>
-              )}
-              {step === 5 ? (
-                <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
-              ) : (
-                <button type="button" className="btn bg-primary" onClick={() => changePage("next")} disabled={!isValid}>
-                  Berikutnya
-                </button>
-              )}
-            </div>
-          </form>
-        </>
+      {/* {!isSubmit ? (
+        <> */}
+      <Title>{displayTitle()}</Title>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-3">{displayForm()}</div>
+        <div className="flex justify-center gap-3">
+          {step > 1 && (
+            <button type="button" className="btn bg-muted" onClick={() => changePage()}>
+              Kembali
+            </button>
+          )}
+          {step === 5 ? (
+            <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
+          ) : (
+            <button type="button" className="btn bg-primary" onClick={() => changePage("next")} disabled={!isValid}>
+              Berikutnya
+            </button>
+          )}
+        </div>
+      </form>
+      {/* </>
       ) : (
         <>
           <Title>Pendaftaran Pesantren</Title>
@@ -293,7 +334,7 @@ const AddPesantren = () => {
             </Link>
           </div>
         </>
-      )}
+      )} */}
     </section>
   );
 };
