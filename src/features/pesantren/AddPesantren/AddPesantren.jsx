@@ -4,15 +4,16 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { Title } from "~/components";
 const Identitas = lazy(() => import("./Identitas"));
 const Keilmuan = lazy(() => import("./Keilmuan"));
 const Pendidikan = lazy(() => import("./Pendidikan"));
 const Tambahan = lazy(() => import("./Tambahan"));
 const Foto = lazy(() => import("./Foto"));
 const Confirmation = lazy(() => import("./Confirmation"));
-import { checkmark } from "~/assets";
+const Info = lazy(() => import("./Info"));
+import { Title } from "~/components";
 import { useAddPesantrenMutation } from "~/app/api/apiSlice";
+import { checkmark } from "~/assets";
 
 const AddPesantren = () => {
   const identitasSchema = yup.object().shape({
@@ -20,10 +21,7 @@ const AddPesantren = () => {
     yayasan: yup.string().required(),
     pendiri: yup.string().required(),
     pengasuh: yup.string().required(),
-    daftarPengasuh: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
+    daftarPengasuh: yup.array().of(yup.string().required()).required(),
     alamat: yup.object().shape({
       alamat: yup.string().required(),
       kecamatan: yup.string().required(),
@@ -32,43 +30,22 @@ const AddPesantren = () => {
   });
   const keilmuanSchema = yup.object().shape({
     sanad: yup.string().required(),
-    talim: yup
-      .array()
-      .of(
-        yup.object().shape({
-          name: yup.string().required(),
-        })
-      )
-      .required(),
-    pendidikan: yup
-      .array()
-      .of(
-        yup.object().shape({
-          name: yup.string().required(),
-        })
-      )
-      .required(),
+    talim: yup.array().of(yup.string().required()).required(),
+    pendidikan: yup.array().of(yup.string().required()).required(),
   });
   const pendidikanSchema = yup.object().shape({
-    lembFormal: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
-    lembNonFormal: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
-    pendFormal: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
-    lainLain: yup
-      .array()
-      .of(yup.object().shape({ name: yup.string().required() }))
-      .required(),
+    lembFormal: yup.array().of(yup.string().required()).required(),
+    lembNonFormal: yup.array().of(yup.string().required()).required(),
+    pendFormal: yup.array().of(yup.string().required()).required(),
+    lainLain: yup.array().of(yup.string().required()).required(),
+    // }),
   });
   const tambahanSchema = yup.object().shape({
     gmaps: yup.string().required(),
+  });
+  const infoSchema = yup.object().shape({
+    deskripsi: yup.string().required(),
+    fasilitas: yup.array().of(yup.string().required()),
   });
   const fotoSchema = yup.object().shape({
     foto: yup.mixed().test("required", (value) => {
@@ -81,7 +58,8 @@ const AddPesantren = () => {
     if (step === 2) return keilmuanSchema;
     if (step === 3) return pendidikanSchema;
     if (step === 4) return tambahanSchema;
-    if (step === 5) return fotoSchema;
+    if (step === 5) return infoSchema;
+    if (step === 6) return fotoSchema;
   };
 
   const [step, setStep] = useState(1);
@@ -96,14 +74,15 @@ const AddPesantren = () => {
     watch,
   } = useForm({
     defaultValues: {
-      daftarPengasuh: [{ name: "" }],
-      talim: [{ name: "" }],
-      pendidikan: [{ name: "" }],
-      lembFormal: [{ name: "" }],
-      lembNonFormal: [{ name: "" }],
-      pendFormal: [{ name: "" }],
-      lainLain: [{ name: "" }],
-      usaha: [{ name: "" }],
+      daftarPengasuh: ["-"],
+      talim: [{}],
+      pendidikan: [{}],
+      lembFormal: [{}],
+      lembNonFormal: [{}],
+      pendFormal: [{}],
+      lainLain: [{}],
+      usaha: ["-"],
+      fasilitas: ["-"],
     },
     resolver: yupResolver(validateForm()),
   });
@@ -152,6 +131,13 @@ const AddPesantren = () => {
   // unit usaha pesantren
   const { fields: usahaFields, append: usahaAppend, remove: usahaRemove } = useFieldArray({ control, name: "usaha" });
 
+  // fasilitas
+  const {
+    fields: fasilitasFields,
+    append: fasilitasAppend,
+    remove: fasilitasRemove,
+  } = useFieldArray({ control, name: "fasilitas" });
+
   const displayForm = () => {
     return (
       <>
@@ -194,7 +180,15 @@ const AddPesantren = () => {
         {step === 4 && (
           <Tambahan register={register} usahaFields={usahaFields} usahaAppend={usahaAppend} usahaRemove={usahaRemove} />
         )}
-        {step === 5 && <Foto register={register} watch={watch} />}
+        {step === 5 && (
+          <Info
+            register={register}
+            fasilitasFields={fasilitasFields}
+            fasilitasAppend={fasilitasAppend}
+            fasilitasRemove={fasilitasRemove}
+          />
+        )}
+        {step === 6 && <Foto register={register} watch={watch} />}
       </>
     );
   };
@@ -206,21 +200,41 @@ const AddPesantren = () => {
         {step === 2 && "Keilmuan Pesantren"}
         {step === 3 && "Lembaga Pendidikan Pesantren"}
         {step === 4 && "Informasi Tambahan"}
-        {step === 5 && "Foto Pesantren"}
+        {step === 5 && "Info Pesantren"}
+        {step === 6 && "Foto Pesantren"}
       </>
     );
   };
 
   const onSubmit = (data) => {
-    const formData = new FormData();
-    for (const [key, value] of Object.entries(data)) {
-      if (typeof value === "object") formData.append(key, value[0]);
-      formData.append(key, value);
-    }
+    const formattedData = {
+      pesantren: data.pesantren,
+      yayasan: data.yayasan,
+      pendiri: data.pendiri,
+      pengasuh: data.pengasuh,
+      deskripsi: data.deskripsi,
+      daftarPengasuh: data.daftarPengasuh,
+      alamat: data.alamat,
+      keilmuan: {
+        sanad: [data.sanad],
+        talim: data.talim,
+        pendidikan: data.pendidikan,
+      },
+      lembaga_pendidikan: {
+        lembFormal: data.lembFormal,
+        lembNonFormal: data.lembNonFormal,
+        pendFormal: data.pendFormal,
+        lainLain: data.lainLain,
+      },
+      informasi_tambahan: {
+        usaha: data.usaha,
+        gmaps: data.gmaps,
+        fasilitas: data.fasilitas,
+      },
+      media: data.media,
+    };
 
-    addPesantren(formData);
-
-    console.log(data);
+    addPesantren(formattedData);
 
     setShowModal(false);
     setIsSubmit(true);
@@ -245,6 +259,7 @@ const AddPesantren = () => {
                 </button>
               )}
               {step === 5 ? (
+                // <Foto register={register} watch={watch} />
                 <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
               ) : (
                 <button type="button" className="btn bg-primary" onClick={() => changePage("next")} disabled={!isValid}>

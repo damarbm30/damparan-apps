@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { board, dots, koinNU, masjid, mubaligh, pesantren } from "~/assets";
+import { board, event, masjid, mubaligh, pesantren, registration, tanyakiai } from "~/assets";
 import { Carousel, Searchbar } from "~/components";
 import { listPesantren, listPromo } from "~/constants/dummy";
 import { useGetPesantrenQuery } from "~/app/api/apiSlice";
@@ -22,18 +22,18 @@ const MENU = [
     link: "/",
   },
   {
-    img: board,
-    name: "KartaNU",
+    img: event,
+    name: "Kegiatan",
     link: "/",
   },
   {
-    img: koinNU,
-    name: "Koin NU",
-    link: "/",
+    img: tanyakiai,
+    name: "Tanyakiai",
+    link: "https://tanyakiai.id/",
   },
   {
-    img: dots,
-    name: "Lainnya",
+    img: registration,
+    name: "Pendaftaran",
     link: "/",
   },
 ];

@@ -1,4 +1,4 @@
-import { plus, minus } from "~/assets";
+import { SelectInput } from "~/components";
 
 const Pendidikan = ({
   register,
@@ -17,146 +17,71 @@ const Pendidikan = ({
 }) => {
   return (
     <div className="flex flex-col gap-2">
-      {/* form lembaga pendidikan formal */}
-      <div className="flex flex-col gap-1">
-        <label htmlFor="lembFormal" className="font-bold text-body">
-          Lembaga Pendidikan Formal
-        </label>
-        <ul className="flex flex-col gap-2">
-          {lembFormalFields.map((field, index) => {
-            return (
-              <div key={field.id} className="relative flex items-center rounded bg-neutral">
-                <input
-                  type="text"
-                  id={`lembFormal${index}`}
-                  placeholder=""
-                  className="w-full rounded bg-neutral px-3 py-2 font-light outline-none placeholder:text-black"
-                  {...register(`lembFormal[${index}].name`)}
-                />
-                <button
-                  type="button"
-                  className={`relative -right-2 flex items-center ${index === 0 && "hidden"}`}
-                  onClick={() => lembFormalRemove(index)}
-                >
-                  <img src={minus} alt="remove" width={16} height={16} />
-                </button>
-                <button
-                  type="button"
-                  className={`relative flex items-center ${index === 0 ? "right-2" : "right-8"}`}
-                  onClick={() => lembFormalAppend()}
-                >
-                  <img src={plus} alt="add" width={16} height={16} />
-                </button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
-      {/* form lembaga pendidikan nonformal */}
-      <div className="flex flex-col gap-1">
-        <label htmlFor="lembNonFormal" className="font-bold text-body">
-          Lembaga Pendidikan Non-Formal
-        </label>
-        <ul className="flex flex-col gap-2">
-          {lembNonFormalFields.map((field, index) => {
-            return (
-              <div key={field.id} className="relative flex items-center rounded bg-neutral">
-                <input
-                  type="text"
-                  id={`lembNonFormal${index}`}
-                  placeholder=""
-                  className="w-full rounded bg-neutral px-3 py-2 font-light outline-none placeholder:text-black"
-                  {...register(`lembNonFormal[${index}].name`)}
-                />
-                <button
-                  type="button"
-                  className={`relative -right-2 flex items-center ${index === 0 && "hidden"}`}
-                  onClick={() => lembNonFormalRemove(index)}
-                >
-                  <img src={minus} alt="remove" width={16} height={16} />
-                </button>
-                <button
-                  type="button"
-                  className={`relative flex items-center ${index === 0 ? "right-2" : "right-8"}`}
-                  onClick={() => lembNonFormalAppend()}
-                >
-                  <img src={plus} alt="add" width={16} height={16} />
-                </button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
-      {/* pendidikan nonformal */}
-      <div className="flex flex-col gap-1">
-        <label htmlFor="pendFormal" className="font-bold text-body">
-          Pendidikan Formal
-        </label>
-        <ul className="flex flex-col gap-2">
-          {pendFormalFields.map((field, index) => {
-            return (
-              <div key={field.id} className="relative flex items-center rounded bg-neutral">
-                <input
-                  type="text"
-                  id={`pendFormal${index}`}
-                  placeholder=""
-                  className="w-full rounded bg-neutral px-3 py-2 font-light outline-none placeholder:text-black"
-                  {...register(`pendFormal[${index}].name`)}
-                />
-                <button
-                  type="button"
-                  className={`relative -right-2 flex items-center ${index === 0 && "hidden"}`}
-                  onClick={() => pendFormalRemove(index)}
-                >
-                  <img src={minus} alt="remove" width={16} height={16} />
-                </button>
-                <button
-                  type="button"
-                  className={`relative flex items-center ${index === 0 ? "right-2" : "right-8"}`}
-                  onClick={() => pendFormalAppend()}
-                >
-                  <img src={plus} alt="add" width={16} height={16} />
-                </button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
-      {/* lain-lain */}
-      <div className="flex flex-col gap-1">
-        <label htmlFor="lainLain" className="font-bold text-body">
-          Lain-Lain
-        </label>
-        <ul className="flex flex-col gap-2">
-          {lainLainFields.map((field, index) => {
-            return (
-              <div key={field.id} className="relative flex items-center rounded bg-neutral">
-                <input
-                  type="text"
-                  id={`lainLain${index}`}
-                  placeholder=""
-                  className="w-full rounded bg-neutral px-3 py-2 font-light outline-none placeholder:text-black"
-                  {...register(`lainLain[${index}].name`)}
-                />
-                <button
-                  type="button"
-                  className={`relative -right-2 flex items-center ${index === 0 && "hidden"}`}
-                  onClick={() => lainLainRemove(index)}
-                >
-                  <img src={minus} alt="remove" width={16} height={16} />
-                </button>
-                <button
-                  type="button"
-                  className={`relative flex items-center ${index === 0 ? "right-2" : "right-8"}`}
-                  onClick={() => lainLainAppend()}
-                >
-                  <img src={plus} alt="add" width={16} height={16} />
-                </button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      <SelectInput
+        label="Lembaga Pendidikan Formal"
+        name="lembFormal"
+        register={register}
+        multiple
+        fields={lembFormalFields}
+        handleAppend={lembFormalAppend}
+        handleRemove={lembFormalRemove}
+      >
+        <option value="" hidden>
+          Silakan pilih
+        </option>
+        <option value="muadalah">Satuan Pendidikan Muadalah (SPM)</option>
+        <option value="diniyah">Pendidikan Diniyah Formal (PDF)</option>
+        <option value="mahadali">Mahad Ali</option>
+      </SelectInput>
+      <SelectInput
+        label="Lembaga Pendidikan Non-Formal"
+        name="lembNonFormal"
+        register={register}
+        multiple
+        fields={lembNonFormalFields}
+        handleAppend={lembNonFormalAppend}
+        handleRemove={lembNonFormalRemove}
+      >
+        <option value="" hidden>
+          Silakan pilih
+        </option>
+        <option value="fkpps">Pendidikan Kesetaraan Pondok Pesantren Salafiyah (FKPPS)</option>
+      </SelectInput>
+      <SelectInput
+        label="Pendidikan Formal"
+        name="pendFormal"
+        register={register}
+        multiple
+        fields={pendFormalFields}
+        handleAppend={pendFormalAppend}
+        handleRemove={pendFormalRemove}
+      >
+        <option value="" hidden>
+          Silakan pilih
+        </option>
+        <option value="sd">SD</option>
+        <option value="smp">SMP</option>
+        <option value="sma">SMA</option>
+        <option value="man">MAN</option>
+        <option value="mi">MI</option>
+        <option value="mts">MTs</option>
+        <option value="man">MAN</option>
+        <option value="universitas">Universitas/Perguruan Tinggi</option>
+      </SelectInput>
+      <SelectInput
+        label="Lain-Lain"
+        name="lainLain"
+        register={register}
+        multiple
+        fields={lainLainFields}
+        handleAppend={lainLainAppend}
+        handleRemove={lainLainRemove}
+      >
+        <option value="" hidden>
+          Silakan pilih
+        </option>
+        <option value="tk">Taman Kanak-Kanak (TK)</option>
+      </SelectInput>
     </div>
   );
 };

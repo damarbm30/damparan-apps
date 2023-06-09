@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { PesantrenItem, Pagination, Searchbar } from "~/components";
+import PesantrenItem from "./PesantrenItem";
+import { Pagination, Searchbar } from "~/components";
 import { useGetPesantrenQuery } from "~/app/api/apiSlice";
 
 const PesantrenSearch = () => {
@@ -11,12 +12,9 @@ const PesantrenSearch = () => {
   const { data: pesantrenApi, isLoading, isSuccess, isError, error, refetch } = useGetPesantrenQuery();
 
   const searchResult = pesantrenApi?.filter((pesantren) => {
-    // const alamat = pesantren.alamat.split(",");
-    // const kabupaten = alamat[alamat.length - 1].trim();
-
     return (
       pesantren.pesantren.toLowerCase().includes(searchParams.get("name")) &&
-      pesantren.alamat.toLowerCase().includes(searchParams.get("city"))
+      pesantren.kabupaten.toLowerCase().includes(searchParams.get("city"))
     );
   });
 

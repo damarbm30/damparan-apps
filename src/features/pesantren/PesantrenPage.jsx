@@ -8,12 +8,13 @@ const PesantrenPage = () => {
   const { data: pesantrenApi, isLoading, isSuccess, isError, error } = useGetPesantrenQuery();
 
   let currentPesantren;
-  let pesantren, yayasan_pengasuh, deskripsi, pendidikan, alamat, fasilitas, foto;
+  let pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto;
 
   if (isSuccess) {
-    currentPesantren = pesantrenApi?.find((pesantren) => id === pesantren.id.toString());
-    ({ pesantren, yayasan_pengasuh, deskripsi, pendidikan, alamat, fasilitas, foto } = currentPesantren);
+    currentPesantren = pesantrenApi?.find((pesantren) => id === pesantren.pesantren_id.toString());
+    ({ pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto } = currentPesantren);
   }
+  console.log(currentPesantren);
 
   return (
     <section>
@@ -22,15 +23,15 @@ const PesantrenPage = () => {
       </div>
       <img src={foto || null} alt={pesantren} width={365} height={500} className="mb-4 min-w-full rounded-2xl" />
       <h1 className="text-2xl font-bold">{pesantren}</h1>
-      <h2 className="mb-3 text-lg">{yayasan_pengasuh}</h2>
+      <h2 className="mb-3 text-lg">{yayasan}</h2>
       <p className="mb-4 text-sm font-light">{deskripsi}</p>
       <h3 className="text-sm font-bold">Fasilitas</h3>
       <ul className="mb-4 text-sm font-light">
         {fasilitas?.length > 0 &&
-          fasilitas?.split(",").map((item, idx) => {
+          fasilitas?.map((item, idx) => {
             return (
               <li key={idx} className="ml-4 list-disc">
-                {item.trim().charAt(0).toUpperCase() + item.trim().slice(1)}
+                {item.fasilitas_name.trim().charAt(0).toUpperCase() + item.fasilitas_name.trim().slice(1)}
               </li>
             );
           })}
@@ -41,7 +42,7 @@ const PesantrenPage = () => {
           pendidikan?.map((item, idx) => {
             return (
               <li key={idx} className="ml-4 list-disc">
-                {item.trim().charAt(0).toUpperCase() + item.trim().slice(1)}
+                {item.pendidikan_name.trim().charAt(0).toUpperCase() + item.pendidikan_name.trim().slice(1)}
               </li>
             );
           })}

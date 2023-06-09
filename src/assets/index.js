@@ -5,8 +5,10 @@ import board from "./board.webp";
 import building from "./building.webp";
 import camera from "./camera.webp";
 import checkmark from "./checkmark.webp";
+import dashboard from "./dashboard.webp";
 import dots from "./dots.webp";
 import dropdown from "./dropdown.webp";
+import event from "./event.webp";
 import googleLogo from "./google-logo.webp";
 import home from "./home.webp";
 import imgPlaceholder from "./img-placeholder.webp";
@@ -21,7 +23,9 @@ import pesantren from "./pesantren.webp";
 import plus from "./plus.webp";
 import profile from "./profile.webp";
 import powerOff from "./power-off.webp";
+import registration from "./registration.webp";
 import search from "./search.webp";
+import tanyakiai from "./tanyakiai.webp";
 import xSymbol from "./x-symbol.webp";
 
 export {
@@ -32,8 +36,10 @@ export {
   building,
   camera,
   checkmark,
+  dashboard,
   dots,
   dropdown,
+  event,
   googleLogo,
   home,
   imgPlaceholder,
@@ -48,6 +54,8 @@ export {
   plus,
   powerOff,
   profile,
+  registration,
   search,
+  tanyakiai,
   xSymbol,
 };
