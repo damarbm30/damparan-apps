@@ -12,11 +12,6 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getPesantren: builder.query({
       query: () => "/pesantren",
-      transformResponse: (response, meta) => {
-        console.log(meta.response);
-
-        return response;
-      },
       providesTags: ["Pesantren"],
     }),
     addPesantren: builder.mutation({
@@ -27,7 +22,15 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Pesantren"],
     }),
+    deletePesantren: builder.mutation({
+      query: (id) => ({
+        url: `pesantren/${id}`,
+        method: "DELETE",
+        body: id,
+      }),
+      invalidatesTags: ["Pesantren"],
+    }),
   }),
 });
 
-export const { useGetPesantrenQuery, useAddPesantrenMutation } = apiSlice;
+export const { useGetPesantrenQuery, useAddPesantrenMutation, useDeletePesantrenMutation } = apiSlice;

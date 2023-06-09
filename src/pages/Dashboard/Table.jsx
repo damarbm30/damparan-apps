@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { minus } from "~/assets";
-import { Loader } from "~/components";
 
 const INFORMASI_HEADER = [
   "Nama Pesantren",
@@ -25,7 +24,17 @@ const PENDIDIKAN_HEADER = [
 
 const TAMBAHAN_HEADER = ["Nama Pesantren", "Unit Usaha Pesantren", "Link Google Maps", "Media Pesantren"];
 
-const InformasiData = ({ id, pesantren, yayasan, pendiri, pengasuh, daftarPengasuh, alamat, className }) => {
+const InformasiData = ({
+  id,
+  pesantren,
+  yayasan,
+  pendiri,
+  pengasuh,
+  daftarPengasuh,
+  alamat,
+  className,
+  handleModalToggle,
+}) => {
   return (
     <>
       <td className={className}>{pesantren}</td>
@@ -33,13 +42,14 @@ const InformasiData = ({ id, pesantren, yayasan, pendiri, pengasuh, daftarPengas
       <td className={className}>{pendiri}</td>
       <td className={className}>{pengasuh}</td>
       <td className={`${className} w-fit`}>
-        {daftarPengasuh.map((pengasuh) => {
-          return <li key={id}>{pengasuh.pengasuh_name}</li>;
-        })}
+        {daftarPengasuh?.length > 0 &&
+          daftarPengasuh?.map((pengasuh, idx) => {
+            return <li key={idx}>{pengasuh.pengasuh_name}</li>;
+          })}
       </td>
       <td className={className}>{alamat}</td>
       <td className={className}>
-        <button className="flex w-full justify-center" onClick={() => console.log(id)}>
+        <button className="flex w-full justify-center" onClick={() => handleModalToggle(id)}>
           <img src={minus} alt="delete button" width={20} height={20} />
         </button>
       </td>
@@ -47,42 +57,91 @@ const InformasiData = ({ id, pesantren, yayasan, pendiri, pengasuh, daftarPengas
   );
 };
 
-const KeilmuanData = ({ className }) => {
+const KeilmuanData = ({ pesantren, yayasan, sanad, talim, alamat, className }) => {
   return (
     <>
-      <td className={className}>PP Ali Maksum</td>
-      <td className={className}>Yayasan Ali Maksum</td>
-      <td className={className}>Sanad Keilmuan</td>
-      <td className={className}>Spesifikasi Ta'lim</td>
-      <td className={className}>Jl. KH. Ali Maksum Gg. Mawar No.RT.06, Krapyak Kulon, Panggungharjo, </td>
+      <td className={className}>{pesantren}</td>
+      <td className={className}>{yayasan}</td>
+      <td className={className}>
+        {sanad?.length > 0 &&
+          sanad?.map((sanad) => {
+            const { sanad_id, sanad_name } = sanad;
+
+            return <li key={sanad_id}>{sanad_name}</li>;
+          })}
+      </td>
+      <td className={className}>
+        {talim?.length > 0 &&
+          talim?.map((talim) => {
+            const { talim_id, talim_name } = talim;
+
+            return <li key={talim_id}>{talim_name}</li>;
+          })}
+      </td>
+      <td className={className}>{alamat}</td>
     </>
   );
 };
 
-const PendidikanData = ({ className }) => {
+const PendidikanData = ({ pesantren, lembFormal, lembNonFormal, pendFormal, lainLain, className }) => {
   return (
     <>
-      <td className={className}>PP Ali Maksum</td>
-      <td className={className}>Lembaga Pendidikan Formal</td>
-      <td className={className}>Lembaga Pendidikan Nonformal</td>
-      <td className={className}>Lembaga Pendidikan</td>
-      <td className={className}>Lain-Lain</td>
+      <td className={className}>{pesantren}</td>
+      <td className={className}>
+        {lembFormal?.length > 0 &&
+          lembFormal?.map((lemb) => {
+            const { lembaga_formal_id, lembaga_formal_name } = lemb;
+            return <li key={lembaga_formal_id}>{lembaga_formal_name}</li>;
+          })}
+      </td>
+      <td className={className}>
+        {lembNonFormal.length > 0 &&
+          lembNonFormal?.map((lemb) => {
+            const { lembaga_nonformal_id, lembaga_nonformal_name } = lemb;
+            return <li key={lembaga_nonformal_id}>{lembaga_nonformal_name}</li>;
+          })}
+      </td>
+      <td className={className}>
+        {pendFormal?.length > 0 &&
+          pendFormal?.map((pend) => {
+            const { pendidikan_formal_id, pendidikan_formal_name } = pend;
+            return <li key={pendidikan_formal_id}>{pendidikan_formal_name}</li>;
+          })}
+      </td>
+      <td className={className}>
+        {lainLain?.length > 0 &&
+          lainLain?.map((item) => {
+            const { lainlain_id, lainlain_name } = item;
+            return <li key={lainlain_id}>{lainlain_name}</li>;
+          })}
+      </td>
     </>
   );
 };
 
-const TambahanData = ({ className }) => {
+const TambahanData = ({ pesantren, usaha, gmaps, facebook, instagram, twitter, website, className }) => {
   return (
     <>
-      <td className={className}>PP Ali Maksum</td>
-      <td className={className}>Koperasi</td>
-      <td className={className}>Link Google Maps</td>
-      <td className={className}>Media Pesantren</td>
+      <td className={className}>{pesantren}</td>
+      <td className={className}>
+        {usaha?.length &&
+          usaha?.map((usaha) => {
+            const { usaha_id, usaha_name } = usaha;
+            return <li key={usaha_id}>{usaha_name}</li>;
+          })}
+      </td>
+      <td className={className}>{gmaps}</td>
+      <td className={className}>
+        <li>Facebook: {facebook || "-"}</li>
+        <li>Instagram: {instagram || "-"}</li>
+        <li>Twitter: {twitter || "-"}</li>
+        <li>Website: {website || "-"}</li>
+      </td>
     </>
   );
 };
 
-const Table = ({ active, isLoading, pesantrenApiData }) => {
+const Table = ({ active, handleModalToggle, pesantrenApiData }) => {
   const [header, setHeader] = useState(INFORMASI_HEADER);
 
   useEffect(() => {
@@ -105,7 +164,7 @@ const Table = ({ active, isLoading, pesantrenApiData }) => {
   }, [active]);
 
   return (
-    <table className="w-full">
+    <table className="mb-4 w-full">
       <thead>
         <tr>
           {header.map((header, idx) => {
@@ -118,12 +177,29 @@ const Table = ({ active, isLoading, pesantrenApiData }) => {
         </tr>
       </thead>
       <tbody>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          pesantrenApiData?.length > 0 &&
+        {pesantrenApiData?.length > 0 &&
           pesantrenApiData?.map((item, idx) => {
-            const { pesantren_id, pesantren, yayasan, pendiri, pengasuh, daftarPengasuh, alamat } = item || {};
+            const {
+              pesantren_id,
+              pesantren,
+              yayasan,
+              pendiri,
+              pengasuh,
+              daftarPengasuh,
+              alamat,
+              sanad,
+              talim,
+              lembFormal,
+              lembNonFormal,
+              pendFormal,
+              lainLain,
+              usaha,
+              gmaps,
+              facebook,
+              instagram,
+              twitter,
+              website,
+            } = item || {};
 
             return (
               <tr key={pesantren_id} className={`${idx % 2 === 0 ? "bg-neutral" : ""} text-sm`}>
@@ -136,18 +212,48 @@ const Table = ({ active, isLoading, pesantrenApiData }) => {
                     pengasuh={pengasuh}
                     daftarPengasuh={daftarPengasuh}
                     alamat={alamat}
+                    handleModalToggle={handleModalToggle}
                     className="px-4 py-3"
                   />
                 )}
-                {active === "keilmuan" && <KeilmuanData className="px-4 py-3" />}
-                {active === "pendidikan" && <PendidikanData className="px-4 py-3" />}
-                {active === "tambahan" && <TambahanData className="px-4 py-3" />}
+                {active === "keilmuan" && (
+                  <KeilmuanData
+                    pesantren={pesantren}
+                    yayasan={yayasan}
+                    sanad={sanad}
+                    talim={talim}
+                    alamat={alamat}
+                    className="px-4 py-3"
+                  />
+                )}
+                {active === "pendidikan" && (
+                  <PendidikanData
+                    pesantren={pesantren}
+                    lembFormal={lembFormal}
+                    lembNonFormal={lembNonFormal}
+                    pendFormal={pendFormal}
+                    lainLain={lainLain}
+                    className="px-4 py-3"
+                  />
+                )}
+                {active === "tambahan" && (
+                  <TambahanData
+                    pesantren={pesantren}
+                    usaha={usaha}
+                    gmaps={gmaps}
+                    facebook={facebook}
+                    instagram={instagram}
+                    twitter={twitter}
+                    website={website}
+                    className="px-4 py-3"
+                  />
+                )}
               </tr>
             );
-          })
-        )}
+          })}
       </tbody>
     </table>
   );
 };
+
 export default Table;
