@@ -258,7 +258,7 @@ const AddPesantren = () => {
                   Kembali
                 </button>
               )}
-              {step === 6 ? (
+              {step === 5 ? (
                 // <Foto register={register} watch={watch} />
                 <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
               ) : (
