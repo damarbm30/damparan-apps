@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { minus } from "~/assets";
-import { Loader } from "~/components";
 
 const INFORMASI_HEADER = [
   "Nama Pesantren",
@@ -25,7 +24,17 @@ const PENDIDIKAN_HEADER = [
 
 const TAMBAHAN_HEADER = ["Nama Pesantren", "Unit Usaha Pesantren", "Link Google Maps", "Media Pesantren"];
 
-const InformasiData = ({ id, pesantren, yayasan, pendiri, pengasuh, daftarPengasuh, alamat, className }) => {
+const InformasiData = ({
+  id,
+  pesantren,
+  yayasan,
+  pendiri,
+  pengasuh,
+  daftarPengasuh,
+  alamat,
+  className,
+  handleModalToggle,
+}) => {
   return (
     <>
       <td className={className}>{pesantren}</td>
@@ -33,13 +42,13 @@ const InformasiData = ({ id, pesantren, yayasan, pendiri, pengasuh, daftarPengas
       <td className={className}>{pendiri}</td>
       <td className={className}>{pengasuh}</td>
       <td className={`${className} w-fit`}>
-        {daftarPengasuh.map((pengasuh) => {
-          return <li key={id}>{pengasuh.pengasuh_name}</li>;
+        {daftarPengasuh.map((pengasuh, idx) => {
+          return <li key={idx}>{pengasuh.pengasuh_name}</li>;
         })}
       </td>
       <td className={className}>{alamat}</td>
       <td className={className}>
-        <button className="flex w-full justify-center" onClick={() => console.log(id)}>
+        <button className="flex w-full justify-center" onClick={() => handleModalToggle(id)}>
           <img src={minus} alt="delete button" width={20} height={20} />
         </button>
       </td>
@@ -82,7 +91,7 @@ const TambahanData = ({ className }) => {
   );
 };
 
-const Table = ({ active, isLoading, pesantrenApiData }) => {
+const Table = ({ active, handleModalToggle, pesantrenApiData }) => {
   const [header, setHeader] = useState(INFORMASI_HEADER);
 
   useEffect(() => {
@@ -105,7 +114,7 @@ const Table = ({ active, isLoading, pesantrenApiData }) => {
   }, [active]);
 
   return (
-    <table className="w-full">
+    <table className="mb-4 w-full">
       <thead>
         <tr>
           {header.map((header, idx) => {
@@ -118,10 +127,7 @@ const Table = ({ active, isLoading, pesantrenApiData }) => {
         </tr>
       </thead>
       <tbody>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          pesantrenApiData?.length > 0 &&
+        {pesantrenApiData?.length > 0 &&
           pesantrenApiData?.map((item, idx) => {
             const { pesantren_id, pesantren, yayasan, pendiri, pengasuh, daftarPengasuh, alamat } = item || {};
 
@@ -136,6 +142,7 @@ const Table = ({ active, isLoading, pesantrenApiData }) => {
                     pengasuh={pengasuh}
                     daftarPengasuh={daftarPengasuh}
                     alamat={alamat}
+                    handleModalToggle={handleModalToggle}
                     className="px-4 py-3"
                   />
                 )}
@@ -144,10 +151,10 @@ const Table = ({ active, isLoading, pesantrenApiData }) => {
                 {active === "tambahan" && <TambahanData className="px-4 py-3" />}
               </tr>
             );
-          })
-        )}
+          })}
       </tbody>
     </table>
   );
 };
+
 export default Table;

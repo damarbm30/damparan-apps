@@ -18,6 +18,7 @@ export default {
       colors: {
         primary: "#23705D",
         secondary: "#397E6D",
+        danger: "#DC3F2A",
         body: "#4F4F4F", // font
         neutral: "#F5F5F5", // input background
         muted: "#B0B0B0",
