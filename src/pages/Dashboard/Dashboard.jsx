@@ -1,12 +1,15 @@
 import { useState } from "react";
 
-import { Pagination } from "~/components";
 import Table from "./Table";
+
+import { Pagination } from "~/components";
 import { powerOff } from "~/assets";
+import { useGetPesantrenQuery } from "~/app/api/apiSlice";
 
 const Dashboard = () => {
   const [filterTimeout, setFilterTimeout] = useState(null);
   const [active, setActive] = useState("informasi");
+  const { data: pesantrenApiData, isLoading, isSuccess } = useGetPesantrenQuery();
 
   const handleFilterChange = (option) => {
     clearTimeout(filterTimeout);
@@ -43,7 +46,7 @@ const Dashboard = () => {
         </select>
       </div>
       <div className="overflow-x-auto pb-4">
-        <Table active={active} />
+        <Table active={active} isLoading={isLoading} pesantrenApiData={pesantrenApiData} />
         {/* <Pagination /> */}
       </div>
     </section>

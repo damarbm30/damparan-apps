@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { minus } from "~/assets";
+import { Loader } from "~/components";
 
 const INFORMASI_HEADER = [
   "Nama Pesantren",
@@ -24,17 +25,21 @@ const PENDIDIKAN_HEADER = [
 
 const TAMBAHAN_HEADER = ["Nama Pesantren", "Unit Usaha Pesantren", "Link Google Maps", "Media Pesantren"];
 
-const InformasiData = ({ className }) => {
+const InformasiData = ({ id, pesantren, yayasan, pendiri, pengasuh, daftarPengasuh, alamat, className }) => {
   return (
     <>
-      <td className={className}>PP Ali Maksum</td>
-      <td className={className}>Yayasan Ali Maksum</td>
-      <td className={className}>K.H. Ali Maksum</td>
-      <td className={className}>K.H. Jirjis Ali</td>
-      <td className={className}>Ny. Hj. Dra. Ida Rufaida Ali</td>
-      <td className={className}>Jl. KH. Ali Maksum Gg. Mawar No.RT.06, Krapyak Kulon, Panggungharjo, </td>
+      <td className={className}>{pesantren}</td>
+      <td className={className}>{yayasan}</td>
+      <td className={className}>{pendiri}</td>
+      <td className={className}>{pengasuh}</td>
+      <td className={`${className} w-fit`}>
+        {daftarPengasuh.map((pengasuh) => {
+          return <li key={id}>{pengasuh.pengasuh_name}</li>;
+        })}
+      </td>
+      <td className={className}>{alamat}</td>
       <td className={className}>
-        <button className="flex w-full justify-center">
+        <button className="flex w-full justify-center" onClick={() => console.log(id)}>
           <img src={minus} alt="delete button" width={20} height={20} />
         </button>
       </td>
@@ -77,7 +82,7 @@ const TambahanData = ({ className }) => {
   );
 };
 
-const Table = ({ active }) => {
+const Table = ({ active, isLoading, pesantrenApiData }) => {
   const [header, setHeader] = useState(INFORMASI_HEADER);
 
   useEffect(() => {
@@ -105,7 +110,7 @@ const Table = ({ active }) => {
         <tr>
           {header.map((header, idx) => {
             return (
-              <th key={idx} className="max-w-[125px] break-words px-4 py-3 text-left">
+              <th key={idx} className="max-w-[275px] break-words px-4 py-3 text-left">
                 {header}
               </th>
             );
@@ -113,16 +118,34 @@ const Table = ({ active }) => {
         </tr>
       </thead>
       <tbody>
-        {[0, 1, 2].map((item, idx) => {
-          return (
-            <tr key={idx} className={`${idx % 2 === 0 ? "bg-neutral" : ""} text-sm`}>
-              {active === "informasi" && <InformasiData className="px-4 py-3" />}
-              {active === "keilmuan" && <KeilmuanData className="px-4 py-3" />}
-              {active === "pendidikan" && <PendidikanData className="px-4 py-3" />}
-              {active === "tambahan" && <TambahanData className="px-4 py-3" />}
-            </tr>
-          );
-        })}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          pesantrenApiData?.length > 0 &&
+          pesantrenApiData?.map((item, idx) => {
+            const { pesantren_id, pesantren, yayasan, pendiri, pengasuh, daftarPengasuh, alamat } = item || {};
+
+            return (
+              <tr key={pesantren_id} className={`${idx % 2 === 0 ? "bg-neutral" : ""} text-sm`}>
+                {active === "informasi" && (
+                  <InformasiData
+                    id={pesantren_id}
+                    pesantren={pesantren}
+                    yayasan={yayasan}
+                    pendiri={pendiri}
+                    pengasuh={pengasuh}
+                    daftarPengasuh={daftarPengasuh}
+                    alamat={alamat}
+                    className="px-4 py-3"
+                  />
+                )}
+                {active === "keilmuan" && <KeilmuanData className="px-4 py-3" />}
+                {active === "pendidikan" && <PendidikanData className="px-4 py-3" />}
+                {active === "tambahan" && <TambahanData className="px-4 py-3" />}
+              </tr>
+            );
+          })
+        )}
       </tbody>
     </table>
   );

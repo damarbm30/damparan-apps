@@ -21,10 +21,6 @@ const AddPesantren = () => {
     yayasan: yup.string().required(),
     pendiri: yup.string().required(),
     pengasuh: yup.string().required(),
-    // daftarPengasuh: yup
-    //   .array()
-    //   .of(yup.object().shape({ value: yup.string().required() }))
-    //   .required(),
     daftarPengasuh: yup.array().of(yup.string().required()).required(),
     alamat: yup.object().shape({
       alamat: yup.string().required(),
@@ -33,47 +29,11 @@ const AddPesantren = () => {
     }),
   });
   const keilmuanSchema = yup.object().shape({
-    // keilmuan: yup.object().shape({
     sanad: yup.string().required(),
-    // talim: yup
-    //   .array()
-    //   .of(
-    //     yup.object().shape({
-    //       value: yup.string().required(),
-    //     })
-    //   )
-    //   .required(),
     talim: yup.array().of(yup.string().required()).required(),
-    // pendidikan: yup
-    //   .array()
-    //   .of(
-    //     yup.object().shape({
-    //       value: yup.string().required(),
-    //     })
-    //   )
-    //   .required(),
-    // }),
     pendidikan: yup.array().of(yup.string().required()).required(),
-    // }),
   });
   const pendidikanSchema = yup.object().shape({
-    // lembaga_pendidikan: yup.object().shape({
-    // lembFormal: yup
-    //   .array()
-    //   .of(yup.object().shape({ value: yup.string().required() }))
-    //   .required(),
-    // lembNonFormal: yup
-    //   .array()
-    //   .of(yup.object().shape({ value: yup.string().required() }))
-    //   .required(),
-    // pendFormal: yup
-    //   .array()
-    //   .of(yup.object().shape({ value: yup.string().required() }))
-    //   .required(),
-    // lainLain: yup
-    //   .array()
-    //   .of(yup.object().shape({ value: yup.string().required() }))
-    //   .required(),
     lembFormal: yup.array().of(yup.string().required()).required(),
     lembNonFormal: yup.array().of(yup.string().required()).required(),
     pendFormal: yup.array().of(yup.string().required()).required(),
@@ -81,20 +41,11 @@ const AddPesantren = () => {
     // }),
   });
   const tambahanSchema = yup.object().shape({
-    // informasi_tambahan: yup.object().shape({
     gmaps: yup.string().required(),
-    // }),
   });
   const infoSchema = yup.object().shape({
     deskripsi: yup.string().required(),
-    // informasi_tambahan: yup.object().shape({
     fasilitas: yup.array().of(yup.string().required()),
-    // fasilitas: yup.array().of(
-    //   yup.object().shape({
-    //     value: yup.string().required(),
-    //   })
-    // ),
-    // }),
   });
   const fotoSchema = yup.object().shape({
     foto: yup.mixed().test("required", (value) => {
@@ -130,8 +81,8 @@ const AddPesantren = () => {
       lembNonFormal: [{}],
       pendFormal: [{}],
       lainLain: [{}],
-      usaha: [{}],
-      fasilitas: [{}],
+      usaha: ["-"],
+      fasilitas: ["-"],
     },
     resolver: yupResolver(validateForm()),
   });
@@ -256,12 +207,6 @@ const AddPesantren = () => {
   };
 
   const onSubmit = (data) => {
-    // const formData = new FormData();
-    // for (const [key, value] of Object.entries(data)) {
-    //   if (typeof value === "object") formData.append(key, value[0]);
-    //   formData.append(key, value);
-    // }
-
     const formattedData = {
       pesantren: data.pesantren,
       yayasan: data.yayasan,
@@ -302,27 +247,28 @@ const AddPesantren = () => {
 
   return (
     <section>
-      {/* {!isSubmit ? (
-        <> */}
-      <Title>{displayTitle()}</Title>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-3">{displayForm()}</div>
-        <div className="flex justify-center gap-3">
-          {step > 1 && (
-            <button type="button" className="btn bg-muted" onClick={() => changePage()}>
-              Kembali
-            </button>
-          )}
-          {step === 5 ? (
-            <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
-          ) : (
-            <button type="button" className="btn bg-primary" onClick={() => changePage("next")} disabled={!isValid}>
-              Berikutnya
-            </button>
-          )}
-        </div>
-      </form>
-      {/* </>
+      {!isSubmit ? (
+        <>
+          <Title>{displayTitle()}</Title>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-3">{displayForm()}</div>
+            <div className="flex justify-center gap-3">
+              {step > 1 && (
+                <button type="button" className="btn bg-muted" onClick={() => changePage()}>
+                  Kembali
+                </button>
+              )}
+              {step === 6 ? (
+                // <Foto register={register} watch={watch} />
+                <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
+              ) : (
+                <button type="button" className="btn bg-primary" onClick={() => changePage("next")} disabled={!isValid}>
+                  Berikutnya
+                </button>
+              )}
+            </div>
+          </form>
+        </>
       ) : (
         <>
           <Title>Pendaftaran Pesantren</Title>
@@ -334,7 +280,7 @@ const AddPesantren = () => {
             </Link>
           </div>
         </>
-      )} */}
+      )}
     </section>
   );
 };

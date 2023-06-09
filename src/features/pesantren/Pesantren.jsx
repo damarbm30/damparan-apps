@@ -2,13 +2,8 @@ import { Link } from "react-router-dom";
 
 import { Carousel, Search, Title } from "~/components";
 import { listPesantren, listPromo } from "~/constants/dummy";
-import { useGetPesantrenQuery } from "~/app/api/apiSlice";
 
 const Pesantren = () => {
-  const { data: pesantrenApi, isLoading, isSuccess, isError, error } = useGetPesantrenQuery();
-
-  console.log(pesantrenApi);
-
   return (
     <section>
       <Title hideButton>Cari Pesantren</Title>

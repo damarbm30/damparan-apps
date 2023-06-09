@@ -5,6 +5,7 @@ import board from "./board.webp";
 import building from "./building.webp";
 import camera from "./camera.webp";
 import checkmark from "./checkmark.webp";
+import dashboard from "./dashboard.webp";
 import dots from "./dots.webp";
 import dropdown from "./dropdown.webp";
 import googleLogo from "./google-logo.webp";
@@ -32,6 +33,7 @@ export {
   building,
   camera,
   checkmark,
+  dashboard,
   dots,
   dropdown,
   googleLogo,

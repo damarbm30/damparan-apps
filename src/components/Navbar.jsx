@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-import { home, pesantren, board, notification, profile } from "~/assets";
+import { dashboard, home, pesantren, board, notification } from "~/assets";
 
 const items = [
   {
@@ -21,20 +21,20 @@ const items = [
     name: "Tambah",
     img: board,
   },
-  // {
-  //   id: 4,
-  //   link: "/profil",
-  //   name: "Profil",
-  //   img: profile,
-  // },
+  {
+    id: 4,
+    link: "/dashboard",
+    name: "Dashboard",
+    img: dashboard,
+  },
 ];
 
 const Navbar = () => {
   return (
     <>
       <Outlet />
-      <nav className="fixed bottom-0 left-1/2 right-1/2 z-[99999] w-full -translate-x-1/2 rounded-t-[40px] bg-white px-5 py-3 shadow-[0_-7px_80px_-10px_rgba(0,0,0,0.2)] sm:w-auto sm:min-w-[275px]">
-        <div className="flex justify-evenly">
+      <nav className="fixed bottom-0 left-1/2 right-1/2 z-[99999] w-full -translate-x-1/2 rounded-t-[40px] bg-white px-5 py-3 shadow-[0_-7px_80px_-10px_rgba(0,0,0,0.2)] sm:w-auto sm:min-w-[375px]">
+        <div className="flex justify-evenly gap-4">
           {items.map((item) => {
             const { id, link, name, img } = item;
 
