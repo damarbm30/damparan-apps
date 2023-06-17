@@ -1,24 +1,30 @@
 import { Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
 
 import { Loader, Navbar } from "~/components";
-import { Dashboard, Home, Login } from "~/pages";
-import { AddPesantren, Pesantren, PesantrenList, PesantrenPage, PesantrenSearch } from "./features/pesantren";
-import { Suspense } from "react";
+import { Dashboard, Home, Login, Profile } from "~/pages";
+import { AddPesantren, Pesantren, PesantrenList, PesantrenPage, PesantrenSearch } from "~/features/pesantren";
+import { ProtectedRoutes, PublicRoutes } from "~/routes";
 
 const App = () => {
   return (
     <main className="container">
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route element={<Navbar />}>
+          <Route element={<ProtectedRoutes />}>
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/pesantren" element={<Pesantren />} />
-            <Route path="/pesantren/all" element={<PesantrenList />} />
-            <Route path="/pesantren/:id" element={<PesantrenPage />} />
-            <Route path="/tambah-pesantren" element={<AddPesantren />} />
-            <Route path="/pencarian" element={<PesantrenSearch />} />
+          </Route>
+          <Route element={<PublicRoutes />}>
+            <Route element={<Navbar />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/pesantren" element={<Pesantren />} />
+              <Route path="/pesantren/all" element={<PesantrenList />} />
+              <Route path="/pesantren/:id" element={<PesantrenPage />} />
+              <Route path="/tambah-pesantren" element={<AddPesantren />} />
+              <Route path="/pencarian" element={<PesantrenSearch />} />
+            </Route>
           </Route>
         </Routes>
       </Suspense>

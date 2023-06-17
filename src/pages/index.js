@@ -1,5 +1,8 @@
-import Dashboard from "./Dashboard/Dashboard";
-import Home from "./Home/Home";
-import Login from "./Login/Login";
+import { lazy } from "react";
 
-export { Dashboard, Home, Login };
+const Dashboard = lazy(() => import("./Dashboard/Dashboard"));
+const Home = lazy(() => import("./Home/Home"));
+const Login = lazy(() => import("./Login/Login"));
+const Profile = lazy(() => import("./Profile/Profile"));
+
+export { Dashboard, Home, Login, Profile };

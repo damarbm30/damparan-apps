@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-import { dashboard, home, pesantren, board, notification } from "~/assets";
+import { dashboard, home, pesantren, board, profile } from "~/assets";
 
 const items = [
   {
@@ -26,6 +26,12 @@ const items = [
     link: "/dashboard",
     name: "Dashboard",
     img: dashboard,
+  },
+  {
+    id: 5,
+    link: "/profile",
+    name: "Profile",
+    img: profile,
   },
 ];
 
