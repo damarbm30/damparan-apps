@@ -41,8 +41,6 @@ const MENU = [
 const Home = () => {
   const { data: pesantrenApi, isLoading, isSuccess, isError, error } = useGetPesantrenQuery();
 
-  console.log(pesantrenApi);
-
   return (
     <section>
       <div className="mb-7">

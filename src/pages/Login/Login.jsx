@@ -1,8 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { googleLogo, logo } from "~/assets";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    localStorage.setItem("token", "tes");
+    navigate("/");
+  };
+
   return (
     <section className="flex flex-col justify-center">
       {/* heading */}
@@ -24,7 +31,7 @@ const Login = () => {
           <label className="font-bold">Password</label>
           <input type="password" placeholder="Isikan password Anda" className="rounded-md border px-2 py-1" />
         </div>
-        <input type="submit" className="btn bg-primary" value="Login" />
+        <input type="submit" value="Login" className="btn mx-auto max-w-fit bg-primary" onClick={handleLogin} />
       </form>
       {/* sign in google */}
       {/* <div className="mb-4 flex flex-col gap-2">
