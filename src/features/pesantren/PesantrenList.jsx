@@ -19,9 +19,6 @@ const PesantrenList = () => {
     pages.push(i);
   }
 
-  console.log(import.meta.env.VITE_BASE_URL);
-  console.log(pesantrenApi);
-
   return (
     <section>
       <Title>Daftar Pesantren</Title>
