@@ -9,8 +9,8 @@ const Foto = ({ register, watch }) => {
   return (
     <div className="flex flex-col gap-2">
       <p className="font-bold text-body">Upload Foto Pesantren</p>
-      <p className="text-xs text-body">Upload minimal 3 foto</p>
-      <TextInput label="" name="foto" register={register} />
+      {/* <p className="text-xs text-body">Upload minimal 3 foto</p> */}
+      <TextInput label="" name="foto_filename" register={register} />
       {/* <label
         htmlFor="foto"
         className="flex cursor-pointer flex-col items-center justify-center rounded bg-neutral py-8"

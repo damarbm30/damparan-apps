@@ -33,15 +33,22 @@ const PesantrenSearch = () => {
       <div className="mb-4 pt-3">
         <Searchbar />
       </div>
-      <p className="mb-8">
-        Menampilkan hasil pencarian '{searchParams.get("name")}'{" "}
-        {searchParams.get("city") && `untuk daerah '${searchParams.get("city")}'`}
+      <p className="mb-8 text-body">
+        Menampilkan hasil pencarian {searchParams?.get("name") && searchParams?.get("name")}
+        {searchParams.get("city") && `untuk daerah ${searchParams.get("city")}`}
       </p>
       <ul className="mb-6 flex flex-col">
-        {currentSearchResult?.length > 0 &&
+        {currentSearchResult?.length > 0 ? (
           currentSearchResult?.map((pesantren) => {
             return <PesantrenItem key={pesantren.id} {...pesantren} />;
-          })}
+          })
+        ) : (
+          <p className="font-bold text-body">
+            Maaf, tidak ditemukan pesantren
+            {searchParams?.get("name") && ` dengan nama ${searchParams?.get("name")}`}
+            {searchParams?.get("city") && ` untuk daerah ${searchParams.get("city")}`}
+          </p>
+        )}
       </ul>
       <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} />
     </section>
