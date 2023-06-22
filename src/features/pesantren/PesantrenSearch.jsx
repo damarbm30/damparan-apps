@@ -9,7 +9,7 @@ const PesantrenSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [pesantrenPerPage, setPesantrenPerPage] = useState(4);
-  const { data: pesantrenApi, isLoading, isSuccess, isError, error, refetch } = useGetPesantrenQuery();
+  const { data: pesantrenApi } = useGetPesantrenQuery();
 
   const searchResult = pesantrenApi?.filter((pesantren) => {
     return (
