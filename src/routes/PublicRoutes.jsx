@@ -15,8 +15,6 @@ const PublicRoutes = () => {
     handleAuth();
   }, [location]);
 
-  console.log(handleAuth());
-
   return handleAuth() ? <Outlet /> : <Navigate to="/login" />;
 };
 export default PublicRoutes;

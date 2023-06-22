@@ -48,9 +48,9 @@ const AddPesantren = () => {
     fasilitas: yup.array().of(yup.string().required()),
   });
   const fotoSchema = yup.object().shape({
-    foto: yup.mixed().test("required", (value) => {
-      return value && value.length >= 3;
-    }),
+    // foto: yup.mixed().test("required", (value) => {
+    //   return value && value.length >= 3;
+    // }),
   });
 
   const validateForm = () => {
@@ -215,6 +215,7 @@ const AddPesantren = () => {
       deskripsi: data.deskripsi,
       daftarPengasuh: data.daftarPengasuh,
       alamat: data.alamat,
+      foto_filename: data.foto_filename,
       keilmuan: {
         sanad: [data.sanad],
         talim: data.talim,
@@ -258,7 +259,7 @@ const AddPesantren = () => {
                   Kembali
                 </button>
               )}
-              {step === 5 ? (
+              {step === 6 ? (
                 // <Foto register={register} watch={watch} />
                 <Confirmation enabled={isValid} showModal={showModal} setShowModal={setShowModal} />
               ) : (

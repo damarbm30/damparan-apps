@@ -1,15 +1,15 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { building, location } from "~/assets";
+import { formatImageUrl } from "~/utils";
 
-const PesantrenItem = ({ pesantren_id, pesantren, yayasan, kecamatan, kabupaten, fasilitas, foto }) => {
-  let formattedURL;
+const PesantrenItem = ({ pesantren_id, pesantren, yayasan, kecamatan, kabupaten, fasilitas, foto_filename }) => {
+  const [imageUrl, setImageUrl] = useState(null);
 
-  if (foto) {
-    const regex = /\/d\/(.+?)\/view/;
-    const match = regex.exec(foto);
-    formattedURL = match[1];
-  }
+  useEffect(() => {
+    formatImageUrl(foto_filename, setImageUrl);
+  }, []);
 
   return (
     <div className="mx-auto min-w-[350px] max-w-[350px]">
@@ -17,7 +17,7 @@ const PesantrenItem = ({ pesantren_id, pesantren, yayasan, kecamatan, kabupaten,
         to={`/pesantren/${pesantren_id}`}
         className="flex w-full items-center gap-7 border-b py-5 first:pt-0 last:border-b-0 last:pb-0"
       >
-        <img src={formattedURL || null} alt={pesantren} width={91} height={91} className="rounded-lg object-contain" />
+        <img src={imageUrl || null} alt={pesantren} width={91} height={91} className="rounded-lg object-contain" />
         <div className="flex w-full flex-col gap-2">
           {/* identitas */}
           <div className="flex flex-col gap-1">
