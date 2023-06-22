@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Suspense } from "react";
 
-import { Loader, Navbar } from "~/components";
+import { Loader, Missing, Navbar } from "~/components";
 import { Dashboard, Home, Login, Profile } from "~/pages";
 import { AddPesantren, Pesantren, PesantrenList, PesantrenPage, PesantrenSearch } from "~/features/pesantren";
 import { ProtectedRoutes, PublicRoutes } from "~/routes";
@@ -26,6 +26,7 @@ const App = () => {
               <Route path="/pencarian" element={<PesantrenSearch />} />
             </Route>
           </Route>
+          <Route path="*" element={<Missing />} />
         </Routes>
       </Suspense>
     </main>

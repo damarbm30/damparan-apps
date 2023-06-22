@@ -11,7 +11,8 @@ const PesantrenPage = () => {
   const { data: pesantrenApi, isLoading } = useGetPesantrenQuery();
 
   let currentPesantren = pesantrenApi?.find((pesantren) => id === pesantren.pesantren_id.toString());
-  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto_filename } = currentPesantren || {};
+  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto_filename, gmaps, website } =
+    currentPesantren || {};
 
   useEffect(() => {
     formatImageUrl(foto_filename, setImageUrl);
@@ -59,12 +60,12 @@ const PesantrenPage = () => {
           <h3 className="text-sm font-bold">Alamat</h3>
           <p className="mb-3 text-sm font-light">{alamat}</p>
           <button className="mb-14 flex">
-            <Link type="button" className="btn bg-primary">
+            <Link to={gmaps} type="button" className="btn bg-primary">
               Lihat Lokasi
             </Link>
           </button>
           <button className="mx-auto w-full">
-            <Link type="button" className="btn bg-primary">
+            <Link to={website} type="button" className="btn bg-primary">
               Kunjungi Laman Pesantren
             </Link>
           </button>
