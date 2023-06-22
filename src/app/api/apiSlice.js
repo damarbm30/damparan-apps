@@ -4,9 +4,6 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
-    // prepareHeaders: (headers) => {
-    //   headers.set("ngrok-skip-browser-warning", true);
-    // },
   }),
   tagTypes: ["Pesantren"],
   endpoints: (builder) => ({
