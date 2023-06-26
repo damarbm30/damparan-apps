@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { lazy, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { object, array, string, mixed } from "yup";
 
 const Identitas = lazy(() => import("./Identitas"));
 const Keilmuan = lazy(() => import("./Keilmuan"));
@@ -15,44 +15,44 @@ import { Title } from "~/components";
 import { useAddPesantrenMutation } from "~/app/api/apiSlice";
 import { checkmark } from "~/assets";
 
-const AddPesantren = () => {
-  const identitasSchema = yup.object().shape({
-    pesantren: yup.string().required(),
-    yayasan: yup.string().required(),
-    pendiri: yup.string().required(),
-    pengasuh: yup.string().required(),
-    daftarPengasuh: yup.array().of(yup.string().required()).required(),
-    alamat: yup.object().shape({
-      alamat: yup.string().required(),
-      kecamatan: yup.string().required(),
-      kabupaten: yup.string().required(),
-    }),
-  });
-  const keilmuanSchema = yup.object().shape({
-    sanad: yup.string().required(),
-    talim: yup.array().of(yup.string().required()).required(),
-    pendidikan: yup.array().of(yup.string().required()).required(),
-  });
-  const pendidikanSchema = yup.object().shape({
-    lembFormal: yup.array().of(yup.string().required()).required(),
-    lembNonFormal: yup.array().of(yup.string().required()).required(),
-    pendFormal: yup.array().of(yup.string().required()).required(),
-    lainLain: yup.array().of(yup.string().required()).required(),
-    // }),
-  });
-  const tambahanSchema = yup.object().shape({
-    gmaps: yup.string().required(),
-  });
-  const infoSchema = yup.object().shape({
-    deskripsi: yup.string().required(),
-    fasilitas: yup.array().of(yup.string().required()),
-  });
-  const fotoSchema = yup.object().shape({
-    // foto: yup.mixed().test("required", (value) => {
-    //   return value && value.length >= 3;
-    // }),
-  });
+const identitasSchema = object().shape({
+  pesantren: string().required(),
+  yayasan: string().required(),
+  pendiri: string().required(),
+  pengasuh: string().required(),
+  daftarPengasuh: array().of(string().required()).required(),
+  alamat: object().shape({
+    alamat: string().required(),
+    kecamatan: string().required(),
+    kabupaten: string().required(),
+  }),
+});
+const keilmuanSchema = object().shape({
+  sanad: string().required(),
+  talim: array().of(string().required()).required(),
+  pendidikan: array().of(string().required()).required(),
+});
+const pendidikanSchema = object().shape({
+  lembFormal: array().of(string().required()).required(),
+  lembNonFormal: array().of(string().required()).required(),
+  pendFormal: array().of(string().required()).required(),
+  lainLain: array().of(string().required()).required(),
+  // }),
+});
+const tambahanSchema = object().shape({
+  gmaps: string().required(),
+});
+const infoSchema = object().shape({
+  deskripsi: string().required(),
+  fasilitas: array().of(string().required()),
+});
+const fotoSchema = object().shape({
+  // foto: mixed().test("required", (value) => {
+  //   return value && value.length >= 3;
+  // }),
+});
 
+const AddPesantren = () => {
   const validateForm = () => {
     if (step === 1) return identitasSchema;
     if (step === 2) return keilmuanSchema;
