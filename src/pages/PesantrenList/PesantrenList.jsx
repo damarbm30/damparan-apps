@@ -22,7 +22,7 @@ const PesantrenList = () => {
   return (
     <section>
       <Title>Daftar Pesantren</Title>
-      {/* content */}
+      {/* CONTENT */}
       {!isLoading ? (
         <>
           <ul className="mb-6 flex flex-col gap-y-6">

@@ -2,8 +2,18 @@ import { Route, Routes } from "react-router-dom";
 import { Suspense } from "react";
 
 import { Loader, Missing, Navbar } from "~/components";
-import { Dashboard, Home, Login, Profile } from "~/pages";
-import { AddPesantren, Pesantren, PesantrenList, PesantrenPage, PesantrenSearch } from "~/features/pesantren";
+import {
+  Dashboard,
+  Home,
+  Profile,
+  Register,
+  AddPesantren,
+  Pesantren,
+  PesantrenList,
+  PesantrenPage,
+  PesantrenSearch,
+} from "~/pages";
+import { Login } from "./features";
 import { ProtectedRoutes, PublicRoutes } from "~/routes";
 
 const App = () => {
@@ -13,6 +23,7 @@ const App = () => {
         <Routes>
           <Route element={<ProtectedRoutes />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Route>
           <Route element={<PublicRoutes />}>
             <Route element={<Navbar />}>

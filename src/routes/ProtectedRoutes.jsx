@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
@@ -5,7 +6,7 @@ const ProtectedRoutes = () => {
   const location = useLocation();
 
   const handleAuth = () => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("_accToken");
 
     if (!token) return false;
     return true;

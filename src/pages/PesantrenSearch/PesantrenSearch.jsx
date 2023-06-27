@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import PesantrenItem from "./PesantrenItem";
+import PesantrenItem from "../PesantrenList/PesantrenItem";
 import { Pagination, Searchbar } from "~/components";
 import { useGetPesantrenQuery } from "~/app/api/apiSlice";
 

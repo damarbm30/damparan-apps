@@ -1,14 +1,29 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import Cookies from "js-cookie";
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: import.meta.env.VITE_BASE_URL,
+  prepareHeaders: (headers) => {
+    // const token = getState().auth.token;
+    const token = Cookies.get("_accToken");
+
+    if (token) headers.set("x-access-token", `${token}`);
+
+    return headers;
+  },
+});
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_URL,
-  }),
+  baseQuery,
   tagTypes: ["Pesantren"],
   endpoints: (builder) => ({
     getPesantren: builder.query({
       query: () => "/pesantren",
+      transformResponse: (response, meta) => {
+        console.log();
+        return response;
+      },
       providesTags: ["Pesantren"],
     }),
     addPesantren: builder.mutation({
@@ -27,7 +42,35 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Pesantren"],
     }),
+    loginUser: builder.mutation({
+      query: (userCredential) => ({
+        url: "/login",
+        method: "POST",
+        body: userCredential,
+      }),
+    }),
+    registerUser: builder.mutation({
+      query: (userCredential) => ({
+        url: "/signup",
+        method: "POST",
+        body: userCredential,
+      }),
+    }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+        body: "",
+      }),
+    }),
   }),
 });
 
-export const { useGetPesantrenQuery, useAddPesantrenMutation, useDeletePesantrenMutation } = apiSlice;
+export const {
+  useGetPesantrenQuery,
+  useAddPesantrenMutation,
+  useDeletePesantrenMutation,
+  useLoginUserMutation,
+  useRegisterUserMutation,
+  useLogoutUserMutation,
+} = apiSlice;
