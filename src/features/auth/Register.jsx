@@ -107,7 +107,7 @@ const Register = () => {
         </div>
         <input type="submit" value="Register" className="btn mx-auto max-w-fit bg-primary" />
       </form>
-      <Link to="/login" className="mx-auto font-medium text-blue-600 underline">
+      <Link to="/login" className="mx-auto font-medium">
         Sudah memiliki akun? Login di sini
       </Link>
     </section>

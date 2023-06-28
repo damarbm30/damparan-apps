@@ -6,14 +6,13 @@ import {
   Dashboard,
   Home,
   Profile,
-  Register,
   AddPesantren,
   Pesantren,
   PesantrenList,
   PesantrenPage,
   PesantrenSearch,
 } from "~/pages";
-import { Login } from "./features";
+import { Login, Register } from "./features";
 import { ProtectedRoutes, PublicRoutes } from "~/routes";
 
 const App = () => {

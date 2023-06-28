@@ -93,10 +93,8 @@ const AddPesantren = () => {
     append: pengasuhAppend,
     remove: pengasuhRemove,
   } = useFieldArray({ control, name: "daftarPengasuh" });
-
   // ta'lim
   const { fields: talimFields, append: talimAppend, remove: talimRemove } = useFieldArray({ control, name: "talim" });
-
   // lembaga pendidikan formal
   const {
     fields: pendidikanFields,
@@ -127,10 +125,8 @@ const AddPesantren = () => {
     append: lainLainAppend,
     remove: lainLainRemove,
   } = useFieldArray({ control, name: "lainLain" });
-
   // unit usaha pesantren
   const { fields: usahaFields, append: usahaAppend, remove: usahaRemove } = useFieldArray({ control, name: "usaha" });
-
   // fasilitas
   const {
     fields: fasilitasFields,
