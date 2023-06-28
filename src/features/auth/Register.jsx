@@ -107,9 +107,12 @@ const Register = () => {
         </div>
         <input type="submit" value="Register" className="btn mx-auto max-w-fit bg-primary" />
       </form>
-      <Link to="/login" className="mx-auto font-medium">
-        Sudah memiliki akun? Login di sini
-      </Link>
+      <p className="mx-auto font-medium">
+        Sudah memiliki akun?&nbsp;
+        <Link to="/login" className="text-blue-600 underline">
+          Login di sini
+        </Link>
+      </p>
     </section>
   );
 };

@@ -80,9 +80,12 @@ const Login = () => {
           <img src={googleLogo} width={20} height={20} /> Sign in with Google
         </button>
       </div> */}
-      <Link to="/register" className="mx-auto font-medium">
-        Belum memiliki akun? Daftar di sini
-      </Link>
+      <p className="mx-auto font-medium">
+        Belum memiliki akun?&nbsp;
+        <Link to="/register" className="text-blue-600 underline">
+          Daftar di sini
+        </Link>
+      </p>
     </section>
   );
 };
