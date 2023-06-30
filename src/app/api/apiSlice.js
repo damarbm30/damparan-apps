@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
     // const token = getState().auth.token;
     const token = Cookies.get("_accToken");
 
-    if (token) headers.set("x-access-token", `${token}`);
+    if (token) headers.set("token", `${token}`);
 
     return headers;
   },
@@ -20,10 +20,6 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getPesantren: builder.query({
       query: () => "/pesantren",
-      transformResponse: (response, meta) => {
-        console.log();
-        return response;
-      },
       providesTags: ["Pesantren"],
     }),
     addPesantren: builder.mutation({
