@@ -50,6 +50,7 @@ const fotoSchema = object().shape({
   // foto: mixed().test("required", (value) => {
   //   return value && value.length >= 3;
   // }),
+  foto: array().of(string().required()),
 });
 
 const AddPesantren = () => {
@@ -83,6 +84,7 @@ const AddPesantren = () => {
       lainLain: [{}],
       usaha: ["-"],
       fasilitas: ["-"],
+      foto_filename: ["-"],
     },
     resolver: yupResolver(validateForm()),
   });
@@ -133,6 +135,12 @@ const AddPesantren = () => {
     append: fasilitasAppend,
     remove: fasilitasRemove,
   } = useFieldArray({ control, name: "fasilitas" });
+  // foto
+  const {
+    fields: fotoFields,
+    append: fotoAppend,
+    remove: fotoRemove,
+  } = useFieldArray({ control, name: "foto_filename" });
 
   const displayForm = () => {
     return (
@@ -184,7 +192,15 @@ const AddPesantren = () => {
             fasilitasRemove={fasilitasRemove}
           />
         )}
-        {step === 6 && <Foto register={register} watch={watch} />}
+        {step === 6 && (
+          <Foto
+            register={register}
+            watch={watch}
+            fotoFields={fotoFields}
+            fotoAppend={fotoAppend}
+            fotoRemove={fotoRemove}
+          />
+        )}
       </>
     );
   };
@@ -231,7 +247,8 @@ const AddPesantren = () => {
       media: data.media,
     };
 
-    addPesantren(formattedData);
+    console.log(formattedData);
+    // addPesantren(formattedData);
 
     setShowModal(false);
     setIsSubmit(true);
