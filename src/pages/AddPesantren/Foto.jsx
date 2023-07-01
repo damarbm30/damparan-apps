@@ -2,7 +2,7 @@ import { imgPlaceholder } from "~/assets";
 import { TextInput } from "~/components";
 import useFilePreview from "~/hooks/useFilePreview";
 
-const Foto = ({ register, watch }) => {
+const Foto = ({ register, watch, fotoFields, fotoAppend, fotoRemove }) => {
   // const file = watch("foto");
   // const [filePreview] = useFilePreview(file);
 
@@ -10,7 +10,15 @@ const Foto = ({ register, watch }) => {
     <div className="flex flex-col gap-2">
       <p className="font-bold text-body">Upload Foto Pesantren</p>
       {/* <p className="text-xs text-body">Upload minimal 3 foto</p> */}
-      <TextInput label="" name="foto_filename" register={register} />
+      <TextInput
+        label=""
+        name="foto_filename"
+        register={register}
+        multiple
+        fields={fotoFields}
+        handleAppend={fotoAppend}
+        handleRemove={fotoRemove}
+      />
       {/* <label
         htmlFor="foto"
         className="flex cursor-pointer flex-col items-center justify-center rounded bg-neutral py-8"
