@@ -22,6 +22,10 @@ export const apiSlice = createApi({
       query: () => "/pesantren",
       providesTags: ["Pesantren"],
     }),
+    getPesantrenById: builder.query({
+      query: (id) => `/pesantren/${id}`,
+      providesTags: ["Pesantren"],
+    }),
     addPesantren: builder.mutation({
       query: (pesantren) => ({
         url: "/pesantren",
@@ -32,7 +36,7 @@ export const apiSlice = createApi({
     }),
     deletePesantren: builder.mutation({
       query: (id) => ({
-        url: `pesantren/${id}`,
+        url: `/pesantrennnn${id}`,
         method: "DELETE",
         body: id,
       }),
@@ -64,6 +68,7 @@ export const apiSlice = createApi({
 
 export const {
   useGetPesantrenQuery,
+  useGetPesantrenByIdQuery,
   useAddPesantrenMutation,
   useDeletePesantrenMutation,
   useLoginUserMutation,
