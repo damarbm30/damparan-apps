@@ -2,17 +2,15 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { Loader, Searchbar } from "~/components";
-import { useGetPesantrenQuery } from "~/app/api/apiSlice";
+import { useGetPesantrenByIdQuery } from "~/app/api/apiSlice";
 import { formatImageUrl } from "~/utils";
 
 const PesantrenPage = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const { id } = useParams();
-  const { data: pesantrenApi, isLoading } = useGetPesantrenQuery();
+  const { data: pesantrenApi, isLoading } = useGetPesantrenByIdQuery(id);
 
-  let currentPesantren = pesantrenApi?.find((pesantren) => id === pesantren.pesantren_id.toString());
-  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto_filename, gmaps, website } =
-    currentPesantren || {};
+  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto_filename, gmaps, website } = pesantrenApi;
 
   useEffect(() => {
     formatImageUrl(foto_filename, setImageUrl);

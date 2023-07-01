@@ -1,5 +1,3 @@
-import Cookies from "js-cookie";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { board, event, masjid, mubaligh, pesantren, registration, tanyakiai } from "~/assets";
@@ -40,20 +38,6 @@ const MENU = [
 ];
 
 const Home = () => {
-  const fetchPesantren = async () => {
-    const response = await fetch("https://damparan-app2.uc.r.appspot.com/pesantren", {
-      method: "GET",
-      headers: {
-        "x-access-token": Cookies.get("_accToken"),
-      },
-    });
-    console.log(await response.json());
-  };
-
-  useEffect(() => {
-    fetchPesantren();
-  }, []);
-
   return (
     <section>
       <div className="mb-7">
