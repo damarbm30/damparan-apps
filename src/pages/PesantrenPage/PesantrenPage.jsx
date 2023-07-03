@@ -10,7 +10,8 @@ const PesantrenPage = () => {
   const { id } = useParams();
   const { data: pesantrenApi, isLoading } = useGetPesantrenByIdQuery(id);
 
-  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto_filename, gmaps, website } = pesantrenApi;
+  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto_filename, gmaps, website } =
+    pesantrenApi || {};
 
   useEffect(() => {
     formatImageUrl(foto_filename, setImageUrl);

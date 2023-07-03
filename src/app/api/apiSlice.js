@@ -23,7 +23,7 @@ export const apiSlice = createApi({
       providesTags: ["Pesantren"],
     }),
     getPesantrenById: builder.query({
-      query: (id) => `/pesantren/${id}`,
+      query: (id) => ({ url: `/pesantren/${id}` }),
       providesTags: ["Pesantren"],
     }),
     addPesantren: builder.mutation({
