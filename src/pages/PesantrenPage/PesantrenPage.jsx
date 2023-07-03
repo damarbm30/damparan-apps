@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { Loader, Searchbar } from "~/components";
+import { Carousel, Loader, Searchbar } from "~/components";
 import { useGetPesantrenByIdQuery } from "~/app/api/apiSlice";
 import { formatImageUrl } from "~/utils";
 
@@ -10,11 +10,13 @@ const PesantrenPage = () => {
   const { id } = useParams();
   const { data: pesantrenApi, isLoading } = useGetPesantrenByIdQuery(id);
 
-  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto_filename, gmaps, website } =
-    pesantrenApi || {};
+  let { pesantren, yayasan, deskripsi, pendidikan, alamat, fasilitas, foto, gmaps, website } = pesantrenApi || {};
 
   useEffect(() => {
-    formatImageUrl(foto_filename, setImageUrl);
+    if (foto) {
+      const selectedImg = foto[0].file_name;
+      formatImageUrl(selectedImg, setImageUrl);
+    }
   }, [isLoading]);
 
   return (

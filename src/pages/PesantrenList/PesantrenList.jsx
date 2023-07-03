@@ -9,8 +9,6 @@ const PesantrenList = () => {
   const [pesantrenPerPage, setPesantrenPerPage] = useState(4);
   const { data: pesantrenApi, isLoading } = useGetPesantrenQuery();
 
-  console.log(pesantrenApi);
-
   const lastIndex = pesantrenPerPage * currentPage;
   const firstIndex = lastIndex - pesantrenPerPage;
   const currentPesantren = pesantrenApi?.slice(firstIndex, lastIndex);

@@ -20,7 +20,7 @@ const identitasSchema = object().shape({
   yayasan: string().required(),
   pendiri: string().required(),
   pengasuh: string().required(),
-  daftarPengasuh: array().of(string().required()).required(),
+  daftarPengasuh: object().shape({ pengasuh_name: array().of(string().required()).required() }),
   alamat: object().shape({
     alamat: string().required(),
     kecamatan: string().required(),
@@ -50,7 +50,13 @@ const fotoSchema = object().shape({
   // foto: mixed().test("required", (value) => {
   //   return value && value.length >= 3;
   // }),
-  foto: array().of(string().required()),
+  foto: object().shape({
+    file_name: array()
+      .of(string().required())
+      .test("required", (value) => {
+        return value.length >= 3;
+      }),
+  }),
 });
 
 const AddPesantren = () => {
@@ -75,7 +81,9 @@ const AddPesantren = () => {
     watch,
   } = useForm({
     defaultValues: {
-      daftarPengasuh: ["-"],
+      daftarPengasuh: {
+        pengasuh_name: ["-"],
+      },
       talim: [{}],
       pendidikan: [{}],
       lembFormal: [{}],
@@ -84,7 +92,9 @@ const AddPesantren = () => {
       lainLain: [{}],
       usaha: ["-"],
       fasilitas: ["-"],
-      foto_filename: ["-"],
+      foto: {
+        file_name: ["-"],
+      },
     },
     resolver: yupResolver(validateForm()),
   });
@@ -94,7 +104,7 @@ const AddPesantren = () => {
     fields: pengasuhFields,
     append: pengasuhAppend,
     remove: pengasuhRemove,
-  } = useFieldArray({ control, name: "daftarPengasuh" });
+  } = useFieldArray({ control, name: "daftarPengasuh.pengasuh_name" });
   // ta'lim
   const { fields: talimFields, append: talimAppend, remove: talimRemove } = useFieldArray({ control, name: "talim" });
   // lembaga pendidikan formal
@@ -140,7 +150,7 @@ const AddPesantren = () => {
     fields: fotoFields,
     append: fotoAppend,
     remove: fotoRemove,
-  } = useFieldArray({ control, name: "foto_filename" });
+  } = useFieldArray({ control, name: "foto.file_name" });
 
   const displayForm = () => {
     return (
@@ -227,7 +237,7 @@ const AddPesantren = () => {
       deskripsi: data.deskripsi,
       daftarPengasuh: data.daftarPengasuh,
       alamat: data.alamat,
-      foto_filename: data.foto_filename,
+      foto: data.foto,
       keilmuan: {
         sanad: [data.sanad],
         talim: data.talim,
@@ -248,7 +258,7 @@ const AddPesantren = () => {
     };
 
     console.log(formattedData);
-    // addPesantren(formattedData);
+    addPesantren(formattedData);
 
     setShowModal(false);
     setIsSubmit(true);

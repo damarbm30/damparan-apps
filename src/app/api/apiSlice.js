@@ -36,7 +36,7 @@ export const apiSlice = createApi({
     }),
     deletePesantren: builder.mutation({
       query: (id) => ({
-        url: `/pesantrennnn${id}`,
+        url: `/pesantren/${id}`,
         method: "DELETE",
         body: id,
       }),
