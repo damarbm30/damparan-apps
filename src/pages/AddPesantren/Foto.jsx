@@ -12,7 +12,7 @@ const Foto = ({ register, watch, fotoFields, fotoAppend, fotoRemove }) => {
       {/* <p className="text-xs text-body">Upload minimal 3 foto</p> */}
       <TextInput
         label=""
-        name="foto_filename"
+        name="foto.file_name"
         register={register}
         multiple
         fields={fotoFields}

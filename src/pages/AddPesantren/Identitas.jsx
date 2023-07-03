@@ -9,7 +9,7 @@ const Identitas = ({ register, pengasuhFields, pengasuhAppend, pengasuhRemove })
       <TextInput label="Nama Pengasuh Saat Ini" name="pengasuh" register={register} />
       <TextInput
         label="Daftar Pengasuh Pesantren"
-        name="daftarPengasuh"
+        name="daftarPengasuh.pengasuh_name"
         register={register}
         multiple
         fields={pengasuhFields}

@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import { building, location } from "~/assets";
 import { formatImageUrl } from "~/utils";
 
-const PesantrenItem = ({ pesantren_id, pesantren, yayasan, kecamatan, kabupaten, fasilitas, foto_filename}) => {
+const PesantrenItem = ({ pesantren_id, pesantren, yayasan, kecamatan, kabupaten, fasilitas, foto }) => {
   const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
-    formatImageUrl(foto_filename, setImageUrl);
+    if (foto) {
+      const selectedImg = foto[0].file_name;
+      formatImageUrl(selectedImg, setImageUrl);
+    }
   }, []);
 
   return (

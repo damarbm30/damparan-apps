@@ -89,11 +89,11 @@ const Dashboard = () => {
       <Modal showModal={showModal}>
         <p className="my-4 text-lg leading-relaxed text-slate-500">Anda ingin menghapus data pesantren ini?</p>
         <div className="flex justify-center gap-3">
-          <button className="btn bg-muted" type="button" onClick={() => setShowModal(false)}>
-            Kembali
-          </button>
           <button type="button" className="btn bg-danger" onClick={() => deletePesantren(rowId)}>
             Ya
+          </button>
+          <button className="btn bg-muted" type="button" onClick={() => setShowModal(false)}>
+            Kembali
           </button>
         </div>
       </Modal>
